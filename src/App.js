@@ -8,11 +8,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ProjectDetail } from './components/ProjectDetail';
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { TopBanner } from "./components/TopBanner";
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <TopBanner />
         <NavBar />
         <Routes>
           <Route path="/" element={
