@@ -84,7 +84,7 @@ export const NavBar = () => {
         <div className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
           <div className="social-icons-dropdown">
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/in/maram-aouini-48a8751b3/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
