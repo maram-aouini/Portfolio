@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import headerImg from "../assets/img/header-img.svg";
-
+import { HashLink } from "react-router-hash-link";
 
 export const Banner = () => {
     const toRotate = useMemo(() => ["web developer", "web designer", "front-end developer", "back-end developer"], []);
@@ -60,9 +60,15 @@ export const Banner = () => {
                 This is a brief introduction about yourself. You can mention your
                 skills, experience, and what you are passionate about.
               </p>
-              <button onClick={() => console.log("connect")}>
-                Let's Connect <ArrowRightCircle size={25} />
-              </button>
+              <HashLink smooth to="#contact">
+                <button
+                  type="button"
+                  className="vvd"
+                  onClick={() => console.log("connect")}
+                >
+                  Let's Connect <ArrowRightCircle size={25} />
+                </button>
+              </HashLink>
             </Col>
             <Col xs={12} md={6} xl={5}>
               <img src={headerImg} alt="Header" />
