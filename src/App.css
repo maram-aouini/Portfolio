@@ -67,36 +67,9 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-image: url('./assets/img/banner-bg.png');
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: #121212 !important;
   color: #fff !important;
   font-family: 'Centra', sans-serif !important;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(18, 18, 18, 0.7);
-  z-index: -1;
-}
-
-/************ Section Box Styling ************/
-.section-box {
-  background: rgba(21, 21, 21, 0.95);
-  border-radius: 30px;
-  padding: 60px 40px;
-  margin: 20px auto;
-  max-width: 1200px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -297,15 +270,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .banner {
   margin-top: 0;
   padding: 260px 0 100px 0;
-  background: transparent;
-}
-.banner .section-box {
-  background: rgba(21, 21, 21, 0.9);
-  border-radius: 30px;
-  padding: 60px 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-image: url('./assets/img/banner-bg.png');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .banner .tagline {
   font-weight: 700;
@@ -370,19 +338,15 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /************ Skills Css ************/
 .skill {
-  padding: 50px 0;
+  padding: 0 0 50px 0;
   position: relative;
-  background: transparent;
 }
 .skill-bx {
-  background: rgba(21, 21, 21, 0.95);
-  border-radius: 30px;
+  background: #151515;
+  border-radius: 64px;
   text-align: center;
   padding: 60px 50px;
-  margin-top: 0;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: -60px;
 }
 .skill h2 {
 	font-size: 45px;
@@ -416,15 +380,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .project {
   padding: 80px 0;
   position: relative;
-  background: transparent;
-}
-.project .section-box {
-  background: rgba(21, 21, 21, 0.95);
-  border-radius: 30px;
-  padding: 60px 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: black;
 }
 .project h2 {
 	font-size: 45px;
@@ -577,18 +533,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/************ Contact Css ************/
+/************ Projects Css ************/
 .contact {
-  background: transparent;
-  padding: 60px 0 100px 0;
-}
-.contact .section-box {
-  background: linear-gradient(90.21deg, rgba(170, 54, 124, 0.9) -5.91%, rgba(74, 47, 189, 0.9) 111.58%);
-  border-radius: 30px;
-  padding: 60px 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+  padding: 60px 0 200px 0;
 }
 .contact img {
   width: 92%;
@@ -659,24 +607,19 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /************ Footer Css ************/
 .footer {
-  padding: 50px 0;
-  background: transparent;
-}
-.footer .section-box {
-  background: rgba(21, 21, 21, 0.95);
-  border-radius: 30px;
-  padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 0 50px 0;
+  background-image: url('./assets/img/footer-bg.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .newsletter-bx {
   background: #FFFFFF;
-  border-radius: 30px;
+  border-radius: 55px;
   color: #121212;
-  padding: 60px 80px;
-  margin-bottom: 40px;
-  margin-top: 0;
+  padding: 85px 125px;
+  margin-bottom: 80px;
+  margin-top: -122px;
 }
 .newsletter-bx h3 {
   font-weight: 700;
