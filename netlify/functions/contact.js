@@ -16,15 +16,23 @@ exports.handler = async (event) => {
     if (!firstName || !lastName || !email || !phone || !message) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ 
-          code: 400, 
-          message: "All fields are required" 
-        }),
+        body: JSON.stringify({ code: 400, message: "All fields are required" }),
+      };
+    }
+
+    // Debug: check env variables
+    console.log("EMAIL_USER:", process.env.EMAIL_USER);
+    console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "SET" : "NOT SET");
+
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ code: 500, message: "Email credentials not set" }),
       };
     }
 
     // Create transporter
-    const contactEmail = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
@@ -33,36 +41,32 @@ exports.handler = async (event) => {
     });
 
     // Email content
-    const name = firstName + " " + lastName;
-    const mail = {
+    const fullName = `${firstName} ${lastName}`;
+    const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: "Contact Form Submission - Portfolio",
-      html: `<p><strong>Name:</strong> ${name}</p>
-             <p><strong>Email:</strong> ${email}</p>
-             <p><strong>Phone:</strong> ${phone}</p>
-             <p><strong>Message:</strong> ${message}</p>`,
+      html: `
+        <p><strong>Name:</strong> ${fullName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `,
       replyTo: email,
     };
 
     // Send email
-    await contactEmail.sendMail(mail);
+    await transporter.sendMail(mailOptions);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
-        code: 200, 
-        status: "Message Sent" 
-      }),
+      body: JSON.stringify({ code: 200, status: "Message Sent" }),
     };
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error sending email:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ 
-        code: 500, 
-        message: "Failed to send message" 
-      }),
+      body: JSON.stringify({ code: 500, message: "Failed to send message" }),
     };
   }
 };
