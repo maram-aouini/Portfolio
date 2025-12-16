@@ -44,7 +44,7 @@ exports.handler = async (event) => {
     const fullName = `${firstName} ${lastName}`;
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER_MAIN,
       subject: "Contact Form Submission - Portfolio",
       html: `
         <p><strong>Name:</strong> ${fullName}</p>
