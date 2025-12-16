@@ -1,101 +1,126 @@
 import { useState, useEffect } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
 import { HashLink } from "react-router-hash-link";
 
-import logo from "../assets/img/logo.svg";
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const handleClickOutside = (event) => {
+      if (menuOpen && !event.target.closest('.floating-navbar')) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [menuOpen]);
 
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
-      <Container>
-        {/* Logo → valid anchor */}
-        <Navbar.Brand href="#home">
-          <img src={logo} alt="Maram Aouini logo" />
-        </Navbar.Brand>
+    <nav className="floating-navbar">
+      <div className="nav-links">
+        <a
+          href="#home"
+          className={`nav-icon-link ${activeLink === "home" ? "active" : ""}`}
+          onClick={() => onUpdateActiveLink("home")}
+          title="Home"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span className="tooltip">Home</span>
+        </a>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <a
+          href="#projects"
+          className={`nav-icon-link ${activeLink === "projects" ? "active" : ""}`}
+          onClick={() => onUpdateActiveLink("projects")}
+          title="Projects"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span className="tooltip">Projects</span>
+        </a>
 
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link
-              href="#home"
-              className={activeLink === "home" ? "active navbar-link" : "navbar-link"}
-              onClick={() => onUpdateActiveLink("home")}
+        <a
+          href="#skills"
+          className={`nav-icon-link ${activeLink === "skills" ? "active" : ""}`}
+          onClick={() => onUpdateActiveLink("skills")}
+          title="Skills"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span className="tooltip">Skills</span>
+        </a>
+      </div>
+
+      <div className="menu-container">
+        <button
+          className={`menu-toggle ${menuOpen ? "open" : ""}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
+
+        <div className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
+          <div className="social-icons-dropdown">
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
             >
-              Home
-            </Nav.Link>
+              <img src={navIcon1} alt="LinkedIn" />
+            </a>
 
-            <Nav.Link
-              href="#skills"
-              className={activeLink === "skills" ? "active navbar-link" : "navbar-link"}
-              onClick={() => onUpdateActiveLink("skills")}
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
             >
-              Skills
-            </Nav.Link>
+              <img src={navIcon2} alt="Facebook" />
+            </a>
 
-            <Nav.Link
-              href="#projects"
-              className={activeLink === "projects" ? "active navbar-link" : "navbar-link"}
-              onClick={() => onUpdateActiveLink("projects")}
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
             >
-              Projects
-            </Nav.Link>
-          </Nav>
+              <img src={navIcon3} alt="Instagram" />
+            </a>
+          </div>
 
-          <span className="navbar-text">
-            <div className="social-icon">
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <img src={navIcon1} alt="LinkedIn" />
-              </a>
-
-              <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Facebook"
-              >
-                <img src={navIcon2} alt="Facebook" />
-              </a>
-
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-              >
-                <img src={navIcon3} alt="Instagram" />
-              </a>
-            </div>
-
-            <HashLink smooth to="#contact">
-              <button type="button" className="vvd">
-                <span>Let’s Connect</span>
-              </button>
-            </HashLink>
-          </span>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          <HashLink
+            smooth
+            to="#contact"
+            className="connect-btn"
+            onClick={() => setMenuOpen(false)}
+          >
+            Let's Connect
+          </HashLink>
+        </div>
+      </div>
+    </nav>
   );
 };
