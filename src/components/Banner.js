@@ -57,8 +57,7 @@ export const Banner = () => {
                 <span className="wrap">{text}</span>
               </h1>
               <p>
-                This is a brief introduction about yourself. You can mention your
-                skills, experience, and what you are passionate about.
+                I develop modern web applications with a focus on clean architecture, performance, and maintainable code. I care about building reliable systems, not just good-looking interfaces.
               </p>
               <HashLink smooth to="#contact">
                 <button
