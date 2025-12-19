@@ -1,3 +1,4 @@
+// src/components/CVNavBar.jsx
 import { useState, useEffect } from "react";
 import { HashLink } from "react-router-hash-link";
 
@@ -5,30 +6,32 @@ import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
 
-export const NavBar = () => {
-  const [activeLink, setActiveLink] = useState("home");
+export const CVNavBar = () => {
+  const [activeLink, setActiveLink] = useState("summary");
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuOpen && !event.target.closest('.floating-navbar')) {
+      if (menuOpen && !event.target.closest(".floating-navbar")) {
         setMenuOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [menuOpen]);
 
   useEffect(() => {
     const onScroll = () => {
-      const sections = ["home", "skills", "projects"];
-      const scrollPos = window.scrollY + 200; // Offset for better detection
+      // Sections on CV Page
+      const sections = ["summary", "experience", "skills", "projects"];
+      const scrollPos = window.scrollY + 300; // Offset for sticky header
 
       sections.forEach((section) => {
         const element = document.getElementById(section);
         if (element) {
           const offsetTop = element.offsetTop;
           const height = element.offsetHeight;
+          // Check if we are within this section
           if (scrollPos >= offsetTop && scrollPos < offsetTop + height) {
             setActiveLink(section);
           }
@@ -51,29 +54,72 @@ export const NavBar = () => {
   return (
     <nav className="floating-navbar">
       <div className="nav-links">
-        <a
-          href="#home"
+        {/* HOME: goes back to main homepage */}
+        <HashLink
+          smooth
+          to="/#home"
           className={`nav-icon-link ${activeLink === "home" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("home")}
           title="Home"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
           <span className="tooltip">Home</span>
+        </HashLink>
+
+        {/* CV SECTIONS */}
+        {/* CV SECTIONS */}
+        <a
+          href="#summary"
+          className={`nav-icon-link ${activeLink === "summary" ? "active" : ""}`}
+          onClick={() => onUpdateActiveLink("summary")}
+          title="Summary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span className="tooltip">Summary</span>
         </a>
 
         <a
           href="#skills"
           className={`nav-icon-link ${activeLink === "skills" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("skills")}
-          title="Skills"
+          title="Languages"
+        >
+          {/* Globe icon for Languages */}
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span className="tooltip">Languages</span>
+        </a>
+
+        <a
+          href="#experience"
+          className={`nav-icon-link ${activeLink === "experience" ? "active" : ""}`}
+          onClick={() => onUpdateActiveLink("experience")}
+          title="Experience"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
           </svg>
-          <span className="tooltip">Skills</span>
+          <span className="tooltip">Experience</span>
         </a>
 
         <a
@@ -87,34 +133,29 @@ export const NavBar = () => {
           </svg>
           <span className="tooltip">Projects</span>
         </a>
-
-        <a
-          href="/cv"
-          className={`nav-icon-link ${activeLink === "cv" ? "active" : ""}`}
-          onClick={() => onUpdateActiveLink("cv")}
-          title="CV"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-          <span className="tooltip">CV</span>
-        </a>
       </div>
 
+      {/* same menu / socials dropdown as homepage */}
       <div className="menu-container">
         <button
           className={`menu-toggle ${menuOpen ? "open" : ""}`}
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="4" y1="12" x2="20" y2="12"></line>
-            <line x1="4" y1="6" x2="20" y2="6"></line>
-            <line x1="4" y1="18" x2="20" y2="18"></line>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="18" x2="20" y2="18" />
           </svg>
         </button>
 
@@ -142,15 +183,15 @@ export const NavBar = () => {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
-              aria-label="CV"
+              aria-label="Instagram"
             >
-              <img src={navIcon3} alt="CV" />
+              <img src={navIcon3} alt="Instagram" />
             </a>
           </div>
 
           <HashLink
             smooth
-            to="#contact"
+            to="/#contact"
             className="connect-btn"
             onClick={() => setMenuOpen(false)}
           >

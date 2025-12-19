@@ -9,24 +9,48 @@ import { ProjectDetail } from './components/ProjectDetail';
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { TopBanner } from "./components/TopBanner";
+import { CVPage } from "./components/CVPage";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <TopBanner />
-        <NavBar />
         <Routes>
           <Route path="/" element={
-            <>
+            <div className="homepage-wrapper">
+              {/* 🌸 SAKURA PETALS - ONLY ON HOMEPAGE */}
+              <div className="sakura-container">
+                {Array.from({ length: 40 }).map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="sakura-petal"
+                    style={{
+                      left: `${i * 2.5}%`,
+                      animationDelay: `-${i * 0.3}s`,
+                      animationDuration: `${12 + (i % 3) * 4}s`
+                    }}
+                  />
+                ))}
+              </div>
+              
+              {/* Your existing homepage content */}
+              <TopBanner />
+              <NavBar />
               <Banner />
               <Skills />
               <Projects />
               <Contact />
               <Footer /> 
+            </div>
+          } />
+          <Route path="/project/:id" element={
+            <>
+              <TopBanner />
+              <NavBar />
+              <ProjectDetail />
             </>
           } />
-          <Route path="/project/:id" element={<ProjectDetail />} />
+          <Route path="/cv" element={<CVPage />} />
         </Routes>
       </div>
     </Router>

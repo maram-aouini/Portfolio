@@ -16,7 +16,7 @@ export const Footer = () => {
 
             <div className="footer-social">
               <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/in/maram-aouini-48a8751b3/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
@@ -24,12 +24,12 @@ export const Footer = () => {
                 <img src={navIcon1} alt="LinkedIn" />
               </a>
               <a
-                href="https://www.facebook.com/"
+                href="https://github.com/maram-aouini"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Facebook"
+                aria-label="Github"
               >
-                <img src={navIcon2} alt="Facebook" />
+                <img src={navIcon2} alt="Github" />
               </a>
               <a
                 href="https://www.instagram.com/"
