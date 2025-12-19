@@ -22,16 +22,25 @@ export const CVNavBar = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      // Sections on CV Page
-      const sections = ["summary", "experience", "skills", "projects"];
-      const scrollPos = window.scrollY + 300; // Offset for sticky header
+      // Sections on CV Page in DOM order
+      const sections = ["summary", "skills", "experience", "certifications"];
+      const scrollPos = window.scrollY + 400; // Increased offset for better detection
+
+      // Check if we are at the bottom of the page
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+
+      if (isAtBottom) {
+        setActiveLink("certifications");
+        return;
+      }
 
       sections.forEach((section) => {
         const element = document.getElementById(section);
         if (element) {
-          const offsetTop = element.offsetTop;
-          const height = element.offsetHeight;
-          // Check if we are within this section
+          const rect = element.getBoundingClientRect();
+          const offsetTop = rect.top + window.scrollY;
+          const height = rect.height;
+
           if (scrollPos >= offsetTop && scrollPos < offsetTop + height) {
             setActiveLink(section);
           }
@@ -123,15 +132,26 @@ export const CVNavBar = () => {
         </a>
 
         <a
-          href="#projects"
-          className={`nav-icon-link ${activeLink === "projects" ? "active" : ""}`}
-          onClick={() => onUpdateActiveLink("projects")}
-          title="Projects"
+          href="#certifications"
+          className={`nav-icon-link ${activeLink === "certifications" ? "active" : ""}`}
+          onClick={() => onUpdateActiveLink("certifications")}
+          title="Certifications"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+            <circle cx="12" cy="8" r="5" />
           </svg>
-          <span className="tooltip">Projects</span>
+          <span className="tooltip">Certifications</span>
         </a>
       </div>
 
