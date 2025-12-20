@@ -144,17 +144,19 @@ export const Contact = () => {
                             onChange={(e) => onFormUpdate('message', e.target.value)}
                           ></textarea>
 
-                          <button type="submit">
-                            <span>{buttonText}</span>
-                          </button>
-                        </Col>
+                          <div className="contact-button-wrapper">
+                            <button type="submit">
+                              <span>{buttonText}</span>
+                            </button>
 
-                        {/* ✅ MESSAGGIO DI ERRORE/SUCCESSO */}
-                        {status.message &&
-                          <p className={status.success === false ? "danger" : "success"}>
-                            {status.message}
-                          </p>
-                        }
+                            {/* ✅ MESSAGGIO DI ERRORE/SUCCESSO */}
+                            {status.message && (
+                              <div className={`status-message-wrapper animate__animated animate__fadeInUp mt-3 ${status.success === false ? "status-danger" : "status-success"}`}>
+                                <p>{status.message}</p>
+                              </div>
+                            )}
+                          </div>
+                        </Col>
 
                       </Row>
                     </form>

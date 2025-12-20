@@ -139,7 +139,7 @@ export const NavBar = () => {
             </a>
 
             <a
-              href="https://www.instagram.com/"
+              href="https://drive.google.com/drive/folders/1aDyZHzLNRaee2EQOqbldaXHTXLE0p9ip?usp=sharing"
               target="_blank"
               rel="noreferrer"
               aria-label="CV"

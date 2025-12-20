@@ -256,10 +256,11 @@ export const Skills = () => {
           <Col>
             <div className="skill-bx">
               <h2>Skills</h2>
-              <p>Passionate about creating engaging and user-friendly interfaces.</p>
-              <p>Proficient in HTML, CSS, JavaScript, and React.</p>
-              <p>Experienced in responsive design and cross-browser compatibility.</p>
-              <p>Skilled in using tools like Git and GitHub for version control.</p>
+              <p>Full Stack Web Development with experience building structured, database-driven web applications.</p>
+              <p>Strong knowledge of HTML, CSS, JavaScript, and React for creating responsive, accessible user interfaces.</p>
+              <p>Back-end development using PHP and Laravel, including authentication, CRUD operations, and database integration with MySQL.</p>
+              <p>Experience with version control using Git and GitHub, and collaborative development workflows.</p>
+              <p>Familiar with debugging, testing, and iterative development in real-world projects.</p>
 
               {/* MAIN CAROUSEL */}
               <Carousel

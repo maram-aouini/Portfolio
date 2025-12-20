@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CVNavBar } from "./CVNavBar";
+import { Footer } from "./Footer";
 import './CVPage.css';
 
 import fastfrwrdLogo from '../assets/img/companies/fastfrwrd-logo.png';
@@ -275,6 +276,7 @@ Built and customized responsive websites using Framer and WordPress, with rapid 
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

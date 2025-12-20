@@ -32,12 +32,12 @@ export const Footer = () => {
                 <img src={navIcon2} alt="Github" />
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://drive.google.com/drive/folders/1aDyZHzLNRaee2EQOqbldaXHTXLE0p9ip?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Instagram"
+                aria-label="CV"
               >
-                <img src={navIcon3} alt="Instagram" />
+                <img src={navIcon3} alt="CV" />
               </a>
             </div>
 
