@@ -22,32 +22,32 @@ const messages = [
   "Nope, nothing here. Just cats... wait, what? 🐈",
   "The page you're looking for is out of office. ☕",
   "You broke the internet. Or this page never existed.",
-    "404 — even React couldn't find this.",
-    "This page took a coffee break and never came back.",
-    "Nothing here. Awkward.",
-    "Congrats, you found absolutely nothing.",
-    "This URL is a work of fiction.",
-    "If this page existed, it doesn't anymore.",
-    "This page is on a different branch. Probably not merged.",
-    "Looks like someone trusted a link they shouldn't have.",
-    "This route was deprecated emotionally.",
-    "The page exists. Just not in this universe.",
-    "404 — task failed successfully.",
-    "This page is still loading. Since 2023.",
-    "You found a bug. It ran away.",
-    "There was a page here. Then JavaScript happened.",
-    "This URL passed QA. Somehow.",
-    "Even the database said 'nope'.",
-    "React Router looked at this and shrugged.",
-    "This page was removed for being too powerful.",
-    "404 — nothing but vibes.",
-    "This route is protected by chaos.",
-    "The content you're looking for is on prod. This is not prod.",
-    "This link works perfectly. Just not here.",
-    "The page is real. The URL is the problem.",
-    "This is why we don't hardcode paths.",
-    "404 — but make it intentional.",
-    "You reached the end of the internet. Please turn around."
+  "404 — even React couldn't find this.",
+  "This page took a coffee break and never came back.",
+  "Nothing here. Awkward.",
+  "Congrats, you found absolutely nothing.",
+  "This URL is a work of fiction.",
+  "If this page existed, it doesn't anymore.",
+  "This page is on a different branch. Probably not merged.",
+  "Looks like someone trusted a link they shouldn't have.",
+  "This route was deprecated emotionally.",
+  "The page exists. Just not in this universe.",
+  "404 — task failed successfully.",
+  "This page is still loading. Since 2023.",
+  "You found a bug. It ran away.",
+  "There was a page here. Then JavaScript happened.",
+  "This URL passed QA. Somehow.",
+  "Even the database said 'nope'.",
+  "React Router looked at this and shrugged.",
+  "This page was removed for being too powerful.",
+  "404 — nothing but vibes.",
+  "This route is protected by chaos.",
+  "The content you're looking for is on prod. This is not prod.",
+  "This link works perfectly. Just not here.",
+  "The page is real. The URL is the problem.",
+  "This is why we don't hardcode paths.",
+  "404 — but make it intentional.",
+  "You reached the end of the internet. Please turn around."
 ];
 
 const normalMessage = messages[Math.floor(Math.random() * messages.length)];
@@ -62,8 +62,7 @@ export const NotFound = () => {
   const [showChaosText, setShowChaosText] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const [boxAnimatedIn, setBoxAnimatedIn] = useState(false);
-  const [animationReady, setAnimationReady] = useState(false); // ✅ NEW: Track readiness
-
+  const [animationReady, setAnimationReady] = useState(false);
   const [isEasterEgg, setIsEasterEgg] = useState(
     new URLSearchParams(location.search).get("egg") === "true"
   );
@@ -74,18 +73,17 @@ export const NotFound = () => {
   const usedCatsRef = useRef([]);
   const catsRefsRef = useRef(new Map());
   const draggingRef = useRef(null);
-
   const [forbiddenZone, setForbiddenZone] = useState(null);
 
   const clearAllTimers = useCallback(() => {
     timersRef.current.forEach(id => {
-      try { clearTimeout(id); } catch (e) {}
-      try { clearInterval(id); } catch (e) {}
+      try { clearTimeout(id); } catch {}
+      try { clearInterval(id); } catch {}
     });
     timersRef.current = [];
   }, []);
 
-  
+  // Layout effect for box measurement
   useLayoutEffect(() => {
     if (!boxRef.current) return;
     const timer = setTimeout(() => {
@@ -105,26 +103,23 @@ export const NotFound = () => {
     return () => clearTimeout(timer);
   }, [isEasterEgg]);
 
-  // Random Easter egg trigger (10% chance)
+  // Random easter egg trigger
   useEffect(() => {
     if (!isEasterEgg && Math.random() < 0.1) {
-      setIsEasterEgg(true);
+      const timer = setTimeout(() => setIsEasterEgg(true), 0); // next tick to ensure DOM exists
+      return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isEasterEgg]);
 
-  //  Run animation when TRULY ready (with fallback)
+  // Trigger animation when easter egg becomes true
   useEffect(() => {
     if (isEasterEgg && animationReady) {
-      const readyTimer = setTimeout(() => {
-        runAnimationSequence();
-      }, 100);
+      const readyTimer = setTimeout(() => runAnimationSequence(), 150);
       return () => clearTimeout(readyTimer);
     }
-  }, [isEasterEgg, animationReady]);
+  }, [isEasterEgg, animationReady, runAnimationSequence]);
 
-  useEffect(() => {
-    return () => clearAllTimers();
-  }, [clearAllTimers]);
+  useEffect(() => () => clearAllTimers(), [clearAllTimers]);
 
   const generateLandingPosition = useCallback(() => {
     let position;
@@ -135,11 +130,9 @@ export const NotFound = () => {
       attempts++;
       if (attempts > 60) break;
     } while (
-      (
-        forbiddenZone &&
+      (forbiddenZone &&
         position > forbiddenZone.left - MIN_DISTANCE &&
-        position < forbiddenZone.right + MIN_DISTANCE
-      ) ||
+        position < forbiddenZone.right + MIN_DISTANCE) ||
       usedPositionsRef.current.some(p => Math.abs(p - position) < MIN_DISTANCE)
     );
 
@@ -157,9 +150,7 @@ export const NotFound = () => {
   }, [forbiddenZone]);
 
   const getUniqueCatImage = useCallback(() => {
-    const available = catImages.filter(
-      img => !usedCatsRef.current.includes(img)
-    );
+    const available = catImages.filter(img => !usedCatsRef.current.includes(img));
     if (available.length === 0) {
       usedCatsRef.current = [];
       return catImages[Math.floor(Math.random() * catImages.length)];
@@ -190,23 +181,18 @@ export const NotFound = () => {
       setCats(prev =>
         prev.map(cat => (cat.id === newCat.id ? { ...cat, landed: true } : cat))
       );
-      
-      // Trigger shake using animation event instead of state toggle
+
       if (boxRef.current) {
         boxRef.current.style.animation = 'none';
-        // Force reflow
         void boxRef.current.offsetHeight;
         boxRef.current.style.animation = '';
         boxRef.current.classList.add('shaking');
-        const shakeOff = setTimeout(() => {
-          boxRef.current?.classList.remove('shaking');
-        }, 500);
+        const shakeOff = setTimeout(() => boxRef.current?.classList.remove('shaking'), 500);
         timersRef.current.push(shakeOff);
       }
     }, 800);
 
-    timersRef.current.push(spawnTimer);
-    timersRef.current.push(landTimer);
+    timersRef.current.push(spawnTimer, landTimer);
   }, [generateLandingPosition, getUniqueCatImage]);
 
   const runAnimationSequence = useCallback(() => {
@@ -235,12 +221,9 @@ export const NotFound = () => {
 
     timersRef.current.push(
       setTimeout(() => {
-        // Final big shake before collapse
         if (boxRef.current && !boxRef.current.classList.contains('shaking')) {
           boxRef.current.classList.add('shaking');
-          timersRef.current.push(
-            setTimeout(() => boxRef.current?.classList.remove('shaking'), 500)
-          );
+          timersRef.current.push(setTimeout(() => boxRef.current?.classList.remove('shaking'), 500));
         }
         timersRef.current.push(
           setTimeout(() => {
@@ -248,9 +231,7 @@ export const NotFound = () => {
             timersRef.current.push(
               setTimeout(() => {
                 setShowChaosText(true);
-                timersRef.current.push(
-                  setTimeout(() => setShowButtons(true), 1000)
-                );
+                timersRef.current.push(setTimeout(() => setShowButtons(true), 1000));
               }, 1500)
             );
           }, 500)
@@ -265,14 +246,10 @@ export const NotFound = () => {
     const el = catsRefsRef.current.get(cat.id);
     if (!el) return;
 
-    try {
-      if (e.pointerId && el.setPointerCapture) el.setPointerCapture(e.pointerId);
-    } catch (err) {}
-
+    try { if (e.pointerId && el.setPointerCapture) el.setPointerCapture(e.pointerId); } catch {}
     const rect = el.getBoundingClientRect();
     const offsetX = e.clientX - rect.left;
     const offsetY = e.clientY - rect.top;
-
     draggingRef.current = { id: cat.id, offsetX, offsetY };
     el.style.cursor = 'grabbing';
     el.style.zIndex = '9999';
@@ -284,12 +261,8 @@ export const NotFound = () => {
     const { id, offsetX, offsetY } = draggingRef.current;
     const el = catsRefsRef.current.get(id);
     if (!el) return;
-
-    const x = e.clientX - offsetX;
-    const y = e.clientY - offsetY;
-
-    el.style.left = `${x}px`;
-    el.style.top = `${y}px`;
+    el.style.left = `${e.clientX - offsetX}px`;
+    el.style.top = `${e.clientY - offsetY}px`;
     el.style.bottom = 'auto';
     el.style.transform = 'none';
   }, []);
@@ -299,9 +272,7 @@ export const NotFound = () => {
     const { id } = draggingRef.current;
     const el = catsRefsRef.current.get(id);
     if (el) {
-      try {
-        if (e && e.pointerId && el.releasePointerCapture) el.releasePointerCapture(e.pointerId);
-      } catch (err) {}
+      try { if (e.pointerId && el.releasePointerCapture) el.releasePointerCapture(e.pointerId); } catch {}
       el.style.cursor = 'grab';
       el.style.zIndex = '';
     }
@@ -324,7 +295,7 @@ export const NotFound = () => {
           <h1 className="notfound-code">404</h1>
           <p className="notfound-text">{normalMessage}</p>
           <Button variant="outline-light" onClick={() => navigate("/")} className="notfound-btn">
-            <FaHome />  Take me home
+            <FaHome /> Take me home
           </Button>
         </div>
       </Container>
@@ -334,14 +305,13 @@ export const NotFound = () => {
   return (
     <Container className="notfound-wrapper easter-egg d-flex align-items-center justify-content-center text-center min-vh-100 position-relative">
       <Button
-  variant="outline-light"
-  className="position-absolute top-0 end-0 m-3"
-  style={{ zIndex: 50 }}
-  onClick={() => navigate("/")}
->
-  <FaHome /> Take me home
-</Button>
-
+        variant="outline-light"
+        className="position-absolute top-0 end-0 m-3"
+        style={{ zIndex: 50 }}
+        onClick={() => navigate("/")}
+      >
+        <FaHome /> Take me home
+      </Button>
 
       <div
         ref={boxRef}
@@ -350,22 +320,19 @@ export const NotFound = () => {
         <h1 className="notfound-code">404</h1>
         <p className="notfound-text">{easterEggMessage}</p>
         <Button variant="outline-light" onClick={() => navigate("/")} className="notfound-btn">
-          <FaHome />  Take me home
+          <FaHome /> Take me home
         </Button>
       </div>
 
       {cats.map(cat => (
         <div
           key={cat.id}
-          ref={el => {
-            if (el) catsRefsRef.current.set(cat.id, el);
-            else catsRefsRef.current.delete(cat.id);
-          }}
+          ref={el => { if (el) catsRefsRef.current.set(cat.id, el); else catsRefsRef.current.delete(cat.id); }}
           onPointerDown={e => handlePointerDown(e, cat)}
           className={`cat ${cat.spawned ? "cat-spawned" : ""} ${cat.landed ? "cat-landed" : ""}`}
           style={{ 
             '--landing-position': `${cat.landingPosition}%`,
-            left: cat.spawned ? `${cat.landingPosition}%` : `${cat.landingPosition}%`,
+            left: `${cat.landingPosition}%`,
             bottom: cat.landed ? '4px' : '-100px',
             transform: cat.landed ? 'translateX(-50%)' : 'translateX(-50%) translateY(100px)',
             opacity: cat.spawned ? 1 : 0
@@ -381,7 +348,7 @@ export const NotFound = () => {
           {showButtons && (
             <div className="chaos-buttons">
               <Button variant="light" onClick={() => navigate("/")} className="chaos-btn">
-                <FaHome />  Take me home
+                <FaHome /> Take me home
               </Button>
               <Button variant="light" onClick={runAnimationSequence} className="chaos-btn">
                 <FaRedo /> Watch again
