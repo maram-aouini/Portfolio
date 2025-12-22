@@ -1,7 +1,7 @@
 import { Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export const ProjectCard = ({ id, title, description, imgUrl }) => {
+export const ProjectCard = ({ id, title, shortDescription, imgUrl, status }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -13,8 +13,9 @@ export const ProjectCard = ({ id, title, description, imgUrl }) => {
       <div className="proj-imgbx" onClick={handleClick} style={{ cursor: 'pointer' }}>
         <img src={imgUrl} alt={title} />
         <div className="proj-txtx">
+          {status && <span className={`status-badge ${status}`}>{status}</span>}
           <h4>{title}</h4>
-          <span>{description}</span>
+          <span>{shortDescription}</span>
         </div>
       </div>
     </Col>

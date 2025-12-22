@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CVNavBar } from "./CVNavBar";
-import { Footer } from "./Footer";
 import './CVPage.css';
 
 import fastfrwrdLogo from '../assets/img/companies/fastfrwrd-logo.png';
@@ -12,24 +11,23 @@ import humangestLogo from '../assets/img/companies/humangest-logo.png';
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 
-
 export const CVPage = () => {
   const navigate = useNavigate();
   const [sidebarMinimized, setSidebarMinimized] = useState(window.innerWidth <= 1200);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1200) {
-        setSidebarMinimized(false);
-      } else {
-        setSidebarMinimized(true);
-      }
-    };
+    // Update page title
+    document.title = "CV - Maram Aouini | Full Stack Web Developer";
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+  }, []);
 
+  useEffect(() => {
+    const handleResize = () => setSidebarMinimized(window.innerWidth <= 1200);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
 
   return (
     <>
@@ -44,22 +42,21 @@ export const CVPage = () => {
         Back to Portfolio
       </button>
 
-      <div className="cv-page-wrapper">
+      <main className="cv-page-wrapper" role="main">
         <div className="cv-layout">
-          <div className={`cv-left-sidebar ${sidebarMinimized ? 'minimized' : ''}`}>
+          <aside className={`cv-left-sidebar ${sidebarMinimized ? 'minimized' : ''}`} aria-label="Sidebar">
             <button className="sidebar-toggle-btn" onClick={() => setSidebarMinimized(!sidebarMinimized)}>
-              {sidebarMinimized ? '➤' : '⬅'}
+              {sidebarMinimized ? '➤' : '☰'}
             </button>
 
             {!sidebarMinimized && (
               <div className="cv-profile-card">
                 <div className="cv-avatar-circle">
                   <img
-  src={require("../assets/img/profile.jpg")}
-  alt="Your Name"
-  className="cv-avatar-inner"
-/>
-
+                    src={require("../assets/img/profile.jpg")}
+                    alt="Your Name"
+                    className="cv-avatar-inner"
+                  />
                 </div>
                 <h1 className="cv-name">MARAM AOUINI</h1>
                 <p className="cv-role">Full Stack Web Developer</p>
@@ -71,7 +68,7 @@ export const CVPage = () => {
                       <polyline points="9 22 9 12 15 12 15 22"></polyline>
                     </svg>
                   </a>
-                  <a href="https://www.linkedin.com/in/maram-aouini-48a8751b3/" target="_blank" rel="noreferrer" className="cv-social-icon" aria-label="LinkedIn">
+                  <a href="https://www.linkedin.com/in/maramaouini/" target="_blank" rel="noreferrer" className="cv-social-icon" aria-label="LinkedIn">
                     <img src={navIcon1} alt="LinkedIn" />
                   </a>
                   <a href="https://github.com/maram-aouini" target="_blank" rel="noreferrer" className="cv-social-icon" aria-label="GitHub">
@@ -79,12 +76,20 @@ export const CVPage = () => {
                   </a>
                 </div>
 
-                <button className="cv-download-btn">DOWNLOAD RESUME</button>
+                <a 
+                  href="https://drive.google.com/drive/folders/1aDyZHzLNRaee2EQOqbldaXHTXLE0p9ip?usp=sharing" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="cv-download-btn"
+                  style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}
+                >
+                  DOWNLOAD RESUME
+                </a>
               </div>
             )}
-          </div>
+          </aside>
 
-          <div className="cv-main-content">
+          <section className="cv-main-content" aria-label="Main Content">
             <div className="cv-content-card">
 
               {/* SUMMARY */}
@@ -98,8 +103,7 @@ export const CVPage = () => {
               </section>
 
               {/* PERSONAL INFO AND LANGUAGES */}
-              <div className="cv-info-grid">
-
+              <section className="cv-info-grid" aria-label="Personal Info and Languages">
                 <div className="cv-info-column">
                   <h3 className="cv-info-heading">personal information</h3>
                   <div className="cv-info-list">
@@ -115,144 +119,69 @@ export const CVPage = () => {
                 <div className="cv-info-column" id="skills">
                   <h3 className="cv-info-heading">languages</h3>
                   <div className="cv-languages">
-                    <div className="cv-language-item">
-                      <div className="cv-lang-header">
-                        <span className="cv-lang-name">English</span>
-                        <span className="cv-lang-level">fluent</span>
+                    {[
+                      {name: 'English', level: 7},
+                      {name: 'Italian', level: 10},
+                      {name: 'Arabic', level: 10},
+                      {name: 'Chinese', level: 2}
+                    ].map((lang, i) => (
+                      <div key={i} className="cv-language-item">
+                        <div className="cv-lang-header">
+                          <span className="cv-lang-name">{lang.name}</span>
+                          <span className="cv-lang-level">{lang.level===10 ? (lang.name==='English'?'fluent':'native'):(lang.level<3?'beginner':'intermediate')}</span>
+                        </div>
+                        <div className="cv-lang-dots">
+                          {Array.from({ length: 10 }).map((_, j) => <span key={j} className={`cv-dot ${j < lang.level ? "filled" : ""}`} />)}
+                        </div>
                       </div>
-                      <div className="cv-lang-dots">{Array.from({ length: 10 }).map((_, i) => <span key={i} className={`cv-dot ${i < 7 ? "filled" : ""}`} />)}</div>
-                    </div>
-                    <div className="cv-language-item">
-                      <div className="cv-lang-header">
-                        <span className="cv-lang-name">Italian</span>
-                        <span className="cv-lang-level">native</span>
-                      </div>
-                      <div className="cv-lang-dots">{Array.from({ length: 10 }).map((_, i) => <span key={i} className="cv-dot filled" />)}</div>
-                    </div>
-                    <div className="cv-language-item">
-                      <div className="cv-lang-header">
-                        <span className="cv-lang-name">Arabic</span>
-                        <span className="cv-lang-level">native</span>
-                      </div>
-                      <div className="cv-lang-dots">{Array.from({ length: 10 }).map((_, i) => <span key={i} className="cv-dot filled" />)}</div>
-                    </div>
-                    <div className="cv-language-item">
-                      <div className="cv-lang-header">
-                        <span className="cv-lang-name">Chinese</span>
-                        <span className="cv-lang-level">beginner</span>
-                      </div>
-                      <div className="cv-lang-dots">{Array.from({ length: 10 }).map((_, i) => <span key={i} className={`cv-dot ${i < 2 ? "filled" : ""}`} />)}</div>
-                    </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              </section>
 
               {/* EXPERIENCE */}
               <section id="experience" className="cv-experience-section">
                 <h2 className="cv-section-title">WORK EXPERIENCE</h2>
-
-                <div className="cv-experience-item">
-                  <div className="cv-exp-date">
-                    <span className="cv-date-badge">Oct 2025 - Jan 2026</span>
-                  </div>
-                  <div className="cv-exp-content">
-                    <h3 className="cv-exp-title">Web Designer</h3>
-                    <div className="cv-exp-company">
-                      <img src={fastfrwrdLogo} alt="FastFRWRD Agency" className="cv-company-logo" />
-                      <span>FastFRWRD Agency, Malta</span>
+                {[ 
+                  {date: 'Oct 2025 - Jan 2026', title: 'Web Designer', company: 'FastFRWRD Agency, Malta', logo: fastfrwrdLogo, desc: `Contributed to web development projects for an international startup during an Erasmus traineeship. Built and customized responsive websites using Framer and WordPress, with rapid prototyping and testing via Replit in a remote team environment.`},
+                  {date: 'Feb 2024 - Feb 2025', title: 'Warehouse Worker', company: 'Adecco Italia S.p.A, Amazon', logo: adeccoLogo, desc: `Package management and goods handling through digital systems. Warehouse organization, compliance with safety procedures, and operational problem resolution.`},
+                  {date: 'Apr 2023 - Jul 2023', title: 'Call Center, Technical Assistance', company: 'OpenJob S.p.A, Enel Energia', logo: enelLogo, desc: `Technical assistance via inbound calls for electricity and gas utilities, invoice analysis, consumption monitoring, tariff plans, and energy sector documentation management.`},
+                  {date: 'Oct 2021 - Mar 2022', title: 'Call Center, Technical Assistance', company: 'Humangest S.p.A, SKY', logo: humangestLogo, desc: `Technical assistance via inbound calls, invoice analysis, PayTV troubleshooting, TV schedule information, packages and documentation related to pay TV, CAM and various decoders.`}
+                ].map((exp, i) => (
+                  <div key={i} className="cv-experience-item">
+                    <div className="cv-exp-date"><span className="cv-date-badge">{exp.date}</span></div>
+                    <div className="cv-exp-content">
+                      <h3 className="cv-exp-title">{exp.title}</h3>
+                      <div className="cv-exp-company">
+                        <img src={exp.logo} alt={exp.company} className="cv-company-logo" />
+                        <span>{exp.company}</span>
+                      </div>
+                      <p className="cv-exp-description">{exp.desc}</p>
                     </div>
-                    <p className="cv-exp-description">
-                      Contributed to web development projects for an international startup during an Erasmus traineeship.
-Built and customized responsive websites using Framer and WordPress, with rapid prototyping and testing via Replit in a remote team environment.
-                    </p>
                   </div>
-                </div>
-
-                <div className="cv-experience-item">
-                  <div className="cv-exp-date">
-                    <span className="cv-date-badge">Feb 2024 - Feb 2025</span>
-                  </div>
-                  <div className="cv-exp-content">
-                    <h3 className="cv-exp-title">Warehouse Worker</h3>
-                    <div className="cv-exp-company">
-                      <img src={adeccoLogo} alt="Adecco Italia S.p.A" className="cv-company-logo" />
-                      <span>Adecco Italia S.p.A, Amazon</span>
-                    </div>
-                    <p className="cv-exp-description">
-                      Package management and goods handling through digital systems. Warehouse 
-                      organization, compliance with safety procedures, and operational problem resolution.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="cv-experience-item">
-                  <div className="cv-exp-date">
-                    <span className="cv-date-badge">Apr 2023 - Jul 2023</span>
-                  </div>
-                  <div className="cv-exp-content">
-                    <h3 className="cv-exp-title">Call Center, Technical Assistance</h3>
-                    <div className="cv-exp-company">
-                      <img src={enelLogo} alt="Enel Energia" className="cv-company-logo" />
-                      <span>OpenJob S.p.A, Enel Energia</span>
-                    </div>
-                    <p className="cv-exp-description">
-                      Technical assistance via inbound calls for electricity and gas utilities, invoice 
-                      analysis, consumption monitoring, tariff plans, and energy sector documentation management.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="cv-experience-item">
-                  <div className="cv-exp-date">
-                    <span className="cv-date-badge">Oct 2021 - Mar 2022</span>
-                  </div>
-                  <div className="cv-exp-content">
-                    <h3 className="cv-exp-title">Call Center, Technical Assistance</h3>
-                    <div className="cv-exp-company">
-                      <img src={humangestLogo} alt="Humangest S.p.A" className="cv-company-logo" />
-                      <span>Humangest S.p.A, SKY</span>
-                    </div>
-                    <p className="cv-exp-description">
-                      Technical assistance via inbound calls, invoice analysis, PayTV troubleshooting, 
-                      TV schedule information, packages and documentation related to pay TV, CAM and various decoders.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </section>
-
-              {/* PROJECTS */}
-              {/* <section id="projects" className="cv-section">
-                <h2 className="cv-section-title">PROJECTS</h2>
-                <p>
-                  Projects will go here. Keep styling consistent with cv-content-card layout.
-                </p>
-              </section> */}
 
               {/* CERTIFICATIONS & TRAINING */}
               <section id="certifications" className="cv-section">
                 <h2 className="cv-section-title">CERTIFICATIONS & TRAINING</h2>
-                
-                <div className="cv-item">
-                  <div className="cv-item-header">
-                    <h3 className="cv-item-title">Full Stack Web Developer</h3>
-                    <span className="cv-date">2025</span>
+                {[
+                  {title: 'Full Stack Web Developer', date: '2025', org: 'Talentform', desc: 'Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL.'},
+                  {title: 'Back End Developer', date: '2025', org: 'Talentform', desc: 'Focused curriculum on server-side programming, database management, API development, and security best practices.'}
+                ].map((cert, i) => (
+                  <div key={i} className="cv-item">
+                    <div className="cv-item-header">
+                      <h3 className="cv-item-title">{cert.title}</h3>
+                      <span className="cv-date">{cert.date}</span>
+                    </div>
+                    <div className="cv-company">{cert.org}</div>
+                    <p>{cert.desc}</p>
                   </div>
-                  <div className="cv-company">Talentform</div>
-                  <p>Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL.</p>
-                </div>
-
-                <div className="cv-item">
-                  <div className="cv-item-header">
-                    <h3 className="cv-item-title">Back End Developer</h3>
-                    <span className="cv-date">2025</span>
-                  </div>
-                  <div className="cv-company">Talentform</div>
-                  <p>Focused curriculum on server-side programming, database management, API development, and security best practices.</p>
-                </div>
+                ))}
               </section>
 
               {/* KEY TECHNICAL STRENGTHS */}
-              <section className="cv-section">
+              <section className="cv-section" aria-label="Key Technical Strengths">
                 <h2 className="cv-section-title">KEY TECHNICAL STRENGTHS</h2>
                 <ul className="cv-styled-list strength-list">
                   <li>Ability to translate requirements into functional web solutions</li>
@@ -263,7 +192,7 @@ Built and customized responsive websites using Framer and WordPress, with rapid 
               </section>
 
               {/* CURRENT TECHNICAL FOCUS */}
-              <section className="cv-section">
+              <section className="cv-section" aria-label="Current Technical Focus">
                 <h2 className="cv-section-title">CURRENT TECHNICAL FOCUS</h2>
                 <ul className="cv-styled-list focus-list">
                   <li>Improving Laravel authentication and database relationships</li>
@@ -274,10 +203,9 @@ Built and customized responsive websites using Framer and WordPress, with rapid 
               </section>
 
             </div>
-          </div>
+          </section>
         </div>
-        <Footer />
-      </div>
+      </main>
     </>
   );
 };

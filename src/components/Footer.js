@@ -4,9 +4,12 @@ import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
 
-export const Footer = () => {
+export const Footer = ({ darkBackground }) => {
   return (
-    <footer className="footer">
+    <footer
+      className="footer"
+      style={{ background: darkBackground ? "hsla(0,0%,8%,0.8)" : "" }}
+    >
       <Container>
         <div className="section-box footer-box">
           <div className="footer-content">
@@ -16,7 +19,7 @@ export const Footer = () => {
 
             <div className="footer-social">
               <a
-                href="https://www.linkedin.com/in/maram-aouini-48a8751b3/"
+                href="https://www.linkedin.com/in/maramaouini/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"

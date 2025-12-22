@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 import navIcon1 from "../assets/img/nav-icon1.svg";
@@ -51,8 +52,9 @@ export const NavBar = () => {
   return (
     <nav className="floating-navbar">
       <div className="nav-links">
-        <a
-          href="#home"
+        <HashLink
+          smooth
+          to="/#home"
           className={`nav-icon-link ${activeLink === "home" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("home")}
           title="Home"
@@ -62,10 +64,11 @@ export const NavBar = () => {
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
           </svg>
           <span className="tooltip">Home</span>
-        </a>
+        </HashLink>
 
-        <a
-          href="#skills"
+        <HashLink
+          smooth
+          to="/#skills"
           className={`nav-icon-link ${activeLink === "skills" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("skills")}
           title="Skills"
@@ -74,10 +77,11 @@ export const NavBar = () => {
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
           <span className="tooltip">Skills</span>
-        </a>
+        </HashLink>
 
-        <a
-          href="#projects"
+        <HashLink
+          smooth
+          to="/#projects"
           className={`nav-icon-link ${activeLink === "projects" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("projects")}
           title="Projects"
@@ -86,10 +90,10 @@ export const NavBar = () => {
             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
           </svg>
           <span className="tooltip">Projects</span>
-        </a>
+        </HashLink>
 
-        <a
-          href="/cv"
+        <Link
+          to="/cv"
           className={`nav-icon-link ${activeLink === "cv" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("cv")}
           title="CV"
@@ -102,7 +106,7 @@ export const NavBar = () => {
             <polyline points="10 9 9 9 8 9"></polyline>
           </svg>
           <span className="tooltip">CV</span>
-        </a>
+        </Link>
       </div>
 
       <div className="menu-container">
@@ -121,7 +125,7 @@ export const NavBar = () => {
         <div className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
           <div className="social-icons-dropdown">
             <a
-              href="https://www.linkedin.com/in/maram-aouini-48a8751b3/"
+              href="https://www.linkedin.com/in/maramaouini/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -150,7 +154,7 @@ export const NavBar = () => {
 
           <HashLink
             smooth
-            to="#contact"
+            to="/#contact"
             className="connect-btn"
             onClick={() => setMenuOpen(false)}
           >

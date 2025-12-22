@@ -80,7 +80,7 @@ export const Contact = () => {
         <div className="section-box">
           <Row className="align-items-center">
             <Col size={12} md={6}>
-              <TrackVisibility>
+              <TrackVisibility once>
                 {({ isVisible }) =>
                   <img
                     className={isVisible ? "animate__animated animate__zoomIn" : ""}
@@ -92,7 +92,7 @@ export const Contact = () => {
             </Col>
 
             <Col size={12} md={6}>
-              <TrackVisibility>
+              <TrackVisibility once>
                 {({ isVisible }) =>
                   <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                     <h2>Get In Touch</h2>

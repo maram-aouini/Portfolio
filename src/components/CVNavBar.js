@@ -89,7 +89,6 @@ export const CVNavBar = () => {
         </HashLink>
 
         {/* CV SECTIONS */}
-        {/* CV SECTIONS */}
         <a
           href="#summary"
           className={`nav-icon-link ${activeLink === "summary" ? "active" : ""}`}
@@ -182,7 +181,7 @@ export const CVNavBar = () => {
         <div className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
           <div className="social-icons-dropdown">
             <a
-              href="https://www.linkedin.com/in/maram-aouini-48a8751b3/"
+              href="https://www.linkedin.com/in/maramaouini/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"

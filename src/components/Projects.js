@@ -22,8 +22,9 @@ export const Projects = () => {
             <TrackVisibility once>
               {({ isVisible }) =>
               <div className={`section-box ${isVisible ? "animate__animated animate__fadeIn": ""}`}>
-                <h2>Projects</h2>
-                <p>Here are some of the projects built while learning web development. They focus on core skills like layouts, responsive design, and basic interactivity, and will keep growing as new things are learned.</p>
+                <h2>Projects & Case Studies</h2>
+                <p>Selected projects and upcoming case studies. Some entries are currently
+  in progress and will be expanded with full technical breakdowns.</p>
                 <Tab.Container id="projects-tabs" defaultActiveKey="first">
                   <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                     <Nav.Item>
