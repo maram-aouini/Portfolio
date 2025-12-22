@@ -33,7 +33,7 @@ const messages = [
   "This route was deprecated emotionally.",
   "The page exists. Just not in this universe.",
   "404 — task failed successfully.",
-  "This page is still loading. Since 2023.",
+  "This page is still loading. Since 2000.",
   "You found a bug. It ran away.",
   "There was a page here. Then JavaScript happened.",
   "This URL passed QA. Somehow.",
@@ -111,30 +111,24 @@ export const NotFound = () => {
     }
   }, [isEasterEgg]);
 
-  // Trigger animation when easter egg becomes true
-  useEffect(() => {
-    if (isEasterEgg && animationReady) {
-      const readyTimer = setTimeout(() => runAnimationSequence(), 150);
-      return () => clearTimeout(readyTimer);
-    }
-  }, [isEasterEgg, animationReady, runAnimationSequence]);
-
-  useEffect(() => () => clearAllTimers(), [clearAllTimers]);
-
   const generateLandingPosition = useCallback(() => {
     let position;
     let attempts = 0;
+
+    // Helper function to check if position is valid
+    const isPositionValid = (pos) => {
+      const inForbiddenZone = forbiddenZone &&
+        pos > forbiddenZone.left - MIN_DISTANCE &&
+        pos < forbiddenZone.right + MIN_DISTANCE;
+      const tooCloseToOthers = usedPositionsRef.current.some(p => Math.abs(p - pos) < MIN_DISTANCE);
+      return !inForbiddenZone && !tooCloseToOthers;
+    };
 
     do {
       position = 5 + Math.random() * 90;
       attempts++;
       if (attempts > 60) break;
-    } while (
-      (forbiddenZone &&
-        position > forbiddenZone.left - MIN_DISTANCE &&
-        position < forbiddenZone.right + MIN_DISTANCE) ||
-      usedPositionsRef.current.some(p => Math.abs(p - position) < MIN_DISTANCE)
-    );
+    } while (!isPositionValid(position));
 
     if (attempts > 60) {
       let tries = 0;
@@ -195,6 +189,7 @@ export const NotFound = () => {
     timersRef.current.push(spawnTimer, landTimer);
   }, [generateLandingPosition, getUniqueCatImage]);
 
+  // FIXED: Define runAnimationSequence before it's used in the useEffect
   const runAnimationSequence = useCallback(() => {
     clearAllTimers();
     setCats([]);
@@ -207,6 +202,7 @@ export const NotFound = () => {
     let spawnedCount = 0;
     const maxCats = 5;
     const intervalMs = 1200;
+    // FIXED: Pre-calculate positions outside the interval to avoid closure issues
     const positions = Array.from({ length: maxCats }, (_, i) => ((i + 1) / (maxCats + 1)) * 100);
 
     const intervalId = setInterval(() => {
@@ -214,6 +210,7 @@ export const NotFound = () => {
         clearInterval(intervalId);
         return;
       }
+      // Now using the pre-calculated positions array
       spawnCat(positions[spawnedCount]);
       spawnedCount++;
     }, intervalMs);
@@ -239,6 +236,16 @@ export const NotFound = () => {
       }, 7000)
     );
   }, [spawnCat, clearAllTimers]);
+
+  // Trigger animation when easter egg becomes true
+  useEffect(() => {
+    if (isEasterEgg && animationReady) {
+      const readyTimer = setTimeout(() => runAnimationSequence(), 150);
+      return () => clearTimeout(readyTimer);
+    }
+  }, [isEasterEgg, animationReady, runAnimationSequence]);
+
+  useEffect(() => () => clearAllTimers(), [clearAllTimers]);
 
   // Drag handlers
   const handlePointerDown = useCallback((e, cat) => {
