@@ -18,7 +18,7 @@ export const CVPage = () => {
   useEffect(() => {
     // Update page title
     document.title = "CV - Maram Aouini | Full Stack Web Developer";
-    
+
     // Scroll to top
     window.scrollTo(0, 0);
   }, []);
@@ -76,10 +76,10 @@ export const CVPage = () => {
                   </a>
                 </div>
 
-                <a 
-                  href="https://drive.google.com/drive/folders/1aDyZHzLNRaee2EQOqbldaXHTXLE0p9ip?usp=sharing" 
-                  target="_blank" 
-                  rel="noreferrer" 
+                <a
+                  href="https://drive.google.com/drive/folders/1aDyZHzLNRaee2EQOqbldaXHTXLE0p9ip?usp=sharing"
+                  target="_blank"
+                  rel="noreferrer"
                   className="cv-download-btn"
                   style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}
                 >
@@ -120,15 +120,24 @@ export const CVPage = () => {
                   <h3 className="cv-info-heading">languages</h3>
                   <div className="cv-languages">
                     {[
-                      {name: 'English', level: 7},
-                      {name: 'Italian', level: 10},
-                      {name: 'Arabic', level: 10},
-                      {name: 'Chinese', level: 2}
+                      { name: 'English', level: 8 },
+                      { name: 'Italian', level: 10 },
+                      { name: 'Arabic', level: 10 },
+                      { name: 'Chinese', level: 2 }
                     ].map((lang, i) => (
                       <div key={i} className="cv-language-item">
                         <div className="cv-lang-header">
                           <span className="cv-lang-name">{lang.name}</span>
-                          <span className="cv-lang-level">{lang.level===10 ? (lang.name==='English'?'fluent':'native'):(lang.level<3?'beginner':'intermediate')}</span>
+                          <span className="cv-lang-level">
+                            {lang.level === 10
+                              ? 'native'
+                              : lang.level >= 8
+                                ? 'fluent'
+                                : lang.level >= 3
+                                  ? 'intermediate'
+                                  : 'beginner'}
+                          </span>
+
                         </div>
                         <div className="cv-lang-dots">
                           {Array.from({ length: 10 }).map((_, j) => <span key={j} className={`cv-dot ${j < lang.level ? "filled" : ""}`} />)}
@@ -139,35 +148,15 @@ export const CVPage = () => {
                 </div>
               </section>
 
-              {/* EXPERIENCE */}
-              <section id="experience" className="cv-experience-section">
-                <h2 className="cv-section-title">WORK EXPERIENCE</h2>
-                {[ 
-                  {date: 'Oct 2025 - Jan 2026', title: 'Web Designer', company: 'FastFRWRD Agency, Malta', logo: fastfrwrdLogo, desc: `Contributed to web development projects for an international startup during an Erasmus traineeship. Built and customized responsive websites using Framer and WordPress, with rapid prototyping and testing via Replit in a remote team environment.`},
-                  {date: 'Feb 2024 - Feb 2025', title: 'Warehouse Worker', company: 'Adecco Italia S.p.A, Amazon', logo: adeccoLogo, desc: `Package management and goods handling through digital systems. Warehouse organization, compliance with safety procedures, and operational problem resolution.`},
-                  {date: 'Apr 2023 - Jul 2023', title: 'Call Center, Technical Assistance', company: 'OpenJob S.p.A, Enel Energia', logo: enelLogo, desc: `Technical assistance via inbound calls for electricity and gas utilities, invoice analysis, consumption monitoring, tariff plans, and energy sector documentation management.`},
-                  {date: 'Oct 2021 - Mar 2022', title: 'Call Center, Technical Assistance', company: 'Humangest S.p.A, SKY', logo: humangestLogo, desc: `Technical assistance via inbound calls, invoice analysis, PayTV troubleshooting, TV schedule information, packages and documentation related to pay TV, CAM and various decoders.`}
-                ].map((exp, i) => (
-                  <div key={i} className="cv-experience-item">
-                    <div className="cv-exp-date"><span className="cv-date-badge">{exp.date}</span></div>
-                    <div className="cv-exp-content">
-                      <h3 className="cv-exp-title">{exp.title}</h3>
-                      <div className="cv-exp-company">
-                        <img src={exp.logo} alt={exp.company} className="cv-company-logo" />
-                        <span>{exp.company}</span>
-                      </div>
-                      <p className="cv-exp-description">{exp.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </section>
+              <br />
+              <br />
 
               {/* CERTIFICATIONS & TRAINING */}
               <section id="certifications" className="cv-section">
                 <h2 className="cv-section-title">CERTIFICATIONS & TRAINING</h2>
                 {[
-                  {title: 'Full Stack Web Developer', date: '2025', org: 'Talentform', desc: 'Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL.'},
-                  {title: 'Back End Developer', date: '2025', org: 'Talentform', desc: 'Focused curriculum on server-side programming, database management, API development, and security best practices.'}
+                  { title: 'Full Stack Web Developer', date: '2025', org: 'Talentform', desc: 'Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL.' },
+                  { title: 'Back End Developer', date: '2025', org: 'Talentform', desc: 'Focused curriculum on server-side programming, database management, API development, and security best practices.' }
                 ].map((cert, i) => (
                   <div key={i} className="cv-item">
                     <div className="cv-item-header">
@@ -200,6 +189,32 @@ export const CVPage = () => {
                   <li>Practicing clean, maintainable code patterns</li>
                   <li>Exploring performance optimization and best practices</li>
                 </ul>
+              </section>
+
+              <br />
+              <br />
+
+              {/* EXPERIENCE */}
+              <section id="experience" className="cv-experience-section">
+                <h2 className="cv-section-title">WORK EXPERIENCE</h2>
+                {[
+                  { date: 'Oct 2025 - Jan 2026', title: 'Web Designer', company: 'FastFRWRD Agency, Malta', logo: fastfrwrdLogo, desc: `Contributed to web development projects for an international startup during an Erasmus traineeship. Built and customized responsive websites using Framer and WordPress, with rapid prototyping and testing via Replit in a remote team environment.` },
+                  { date: 'Feb 2024 - Feb 2025', title: 'Warehouse Worker', company: 'Adecco Italia S.p.A, Amazon', logo: adeccoLogo, desc: `Package management and goods handling through digital systems. Warehouse organization, compliance with safety procedures, and operational problem resolution.` },
+                  { date: 'Apr 2023 - Jul 2023', title: 'Call Center, Technical Assistance', company: 'OpenJob S.p.A, Enel Energia', logo: enelLogo, desc: `Technical assistance via inbound calls for electricity and gas utilities, invoice analysis, consumption monitoring, tariff plans, and energy sector documentation management.` },
+                  { date: 'Oct 2021 - Mar 2022', title: 'Call Center, Technical Assistance', company: 'Humangest S.p.A, SKY', logo: humangestLogo, desc: `Technical assistance via inbound calls, invoice analysis, PayTV troubleshooting, TV schedule information, packages and documentation related to pay TV, CAM and various decoders.` }
+                ].map((exp, i) => (
+                  <div key={i} className="cv-experience-item">
+                    <div className="cv-exp-date"><span className="cv-date-badge">{exp.date}</span></div>
+                    <div className="cv-exp-content">
+                      <h3 className="cv-exp-title">{exp.title}</h3>
+                      <div className="cv-exp-company">
+                        <img src={exp.logo} alt={exp.company} className="cv-company-logo" />
+                        <span>{exp.company}</span>
+                      </div>
+                      <p className="cv-exp-description">{exp.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </section>
 
             </div>

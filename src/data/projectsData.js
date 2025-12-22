@@ -54,7 +54,7 @@ export const projectsData = [
   status: "live",
   shortDescription: "An interactive, animated 404 page with draggable cats and surprise Easter eggs.",
   fullDescription: [
-  "This project is a fully interactive 404 error page built in React. Beyond a simple error message, it includes draggable elements, randomized animations, and a hidden Easter egg mode for playful user engagement. Try interacting with everything—you might just unlock a secret!",
+  "This project is a fully interactive 404 error page built in React. Beyond a simple error message, it includes draggable elements, randomized animations, and a hidden Easter egg mode with a 10% chance of unlocking a secret message for playful user engagement.", " Try visiting the page multiple times—you might just unlock a secret!",
   "The page handles complex animation sequences, state management for multiple dynamic elements, and ensures smooth performance even with overlapping timers and transitions.",
   "It demonstrates advanced React skills including hooks, useRef management, useLayoutEffect for layout measurement, and precise control over component mounting and animations."
 ],
@@ -68,7 +68,7 @@ export const projectsData = [
     "CSS Animations"
   ],
   liveLink: "https://maramaouini.netlify.app/404",
-  githubLink: "https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/components/NotFound.js",
+  githubLink: "https://github.com/maram-aouini/Portfolio/blob/main/src/components/NotFound.js",
   psa: {
     problem:
       "The goal was to create an engaging, interactive 404 page while maintaining smooth performance and predictable component behavior. Challenges included coordinating multiple animations, preventing layout flickering, and managing dynamic state for multiple draggable elements.",

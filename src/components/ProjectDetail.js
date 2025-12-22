@@ -42,18 +42,6 @@ export const ProjectDetail = () => {
         <Row className="justify-content-center">
           <Col lg={12}>
             <div className="section-box mt-5">
-              <Row className="mb-4">
-                <Col>
-                  <Button
-                    variant="outline-light"
-                    onClick={() => navigate(-1)}
-                    className="back-btn"
-                  >
-                    <ArrowLeft size={20} className="me-2" />
-                    Back to Projects
-                  </Button>
-                </Col>
-              </Row>
 
               <Row>
                 <Col lg={6} className="mb-4 mb-lg-0">
@@ -153,7 +141,7 @@ export const ProjectDetail = () => {
                   </h2>
 
                   {/* Mobile vertical title */}
-                  <h2 className="project-psa-title-vertical d-block d-md-none text-center mb-4">
+                  <h2 className="project-psa-title-vertical d-none d-md-none text-center mb-4">
                     <span>Problem</span>
                     <span className="title-arrow">↓</span>
                     <span>Solution</span>
@@ -195,6 +183,18 @@ export const ProjectDetail = () => {
                   </ul>
                 </div>
               )}
+              <Row className="mb-4">
+                <Col>
+                  <Button
+                    variant="outline-light"
+                    onClick={() => navigate(-1)}
+                    className="back-btn"
+                  >
+                    <ArrowLeft size={20} className="me-2" />
+                    Back to Projects
+                  </Button>
+                </Col>
+              </Row>
             </div>
           </Col>
         </Row>

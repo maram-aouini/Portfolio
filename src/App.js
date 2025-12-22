@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
 import { Skills } from "./components/Skills";
+import { CurrentlyWorkingOn } from "./components/CurrentlyWorkingOn";
 import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
@@ -52,6 +53,7 @@ function AppWrapper() {
               <Banner />
               <Skills />
               <Projects />
+              <CurrentlyWorkingOn />
               <Contact />
             </main>
           </>
