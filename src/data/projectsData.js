@@ -145,6 +145,4 @@ export const projectsData = [
     },
     learned: []
   }
-  /* project 6 */
-
 ];

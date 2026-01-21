@@ -1,68 +1,15 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { Package, BookOpen, Calendar, Globe2 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import { workingOnData } from "../data/workingOnData";
+import { useNavigate } from "react-router-dom";
+
+import "./WorkingOn.css";
 
 export const CurrentlyWorkingOn = () => {
     const sectionRef = useRef(null);
-
-    const nowItems = [
-        {
-    icon: Globe2,
-    title: "Language changer Button",
-    desc: "Button to change the language of the portfolio website",
-    progress: 50,
-    stage: "Building",
-    featured: true
-  },
-  /* {
-    icon: Briefcase,
-    title: "Job Application Tracker",
-    desc: "Full-stack app to track applications, interviews, companies, and follow-ups",
-    progress: 10,
-    stage: "Backend Development",
-  }, */
-  {
-    icon: Package,
-    title: "Grocery/Kitchen Inventory Tracker",
-    desc: "Real-time pantry management with expiration alerts and auto shopping lists",
-    progress: 45,
-    stage: "Backend Development",
-    featured: true
-  },
-  {
-    icon: BookOpen,
-    title: "Book/Manga Library Tracker",
-    desc: "Personal collection manager with reading progress, ratings, and lending logs",
-    progress: 15,
-    stage: "Frontend Development"
-  },
-  {
-    icon: Calendar,
-    title: "Content Creation Calendar",
-    desc: "Blog/social media scheduler with performance analytics and idea board",
-    progress: 10,
-    stage: "Planning"
-  },
-];
-
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    sectionRef.current
-                        .querySelectorAll(".progress-fill")
-                        .forEach((bar) => {
-                            bar.style.width = bar.dataset.progress + "%";
-                        });
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.3 }
-        );
-
-        if (sectionRef.current) observer.observe(sectionRef.current);
-    }, []);
+    const { t } = useLanguage();
+    const navigate = useNavigate();
 
     return (
         <section className="now-section py-5" id="now" ref={sectionRef}>
@@ -71,38 +18,54 @@ export const CurrentlyWorkingOn = () => {
                     <Col lg={10}>
                         <div className="section-box">
                             <div className="text-center mb-5">
-                                <h2 className="mb-3 now-heading">Currently Working On</h2>
+                                <h2 className="mb-3 now-heading">{t('current.title')}</h2>
                                 <p className="now-subtitle">
-                                    Coding in Public | Updated Monthly
+                                    {t('current.subtitle')}
                                 </p>
-                                <span className="now-updated">Last update: Dec 2025</span>
+                                <span className="now-updated">{t('current.lastUpdate')}</span>
                             </div>
 
                             <Row>
-                                {nowItems.map((item, index) => {
-                                    const Icon = item.icon;
+                                {workingOnData.map((project, index) => {
+                                    const Icon = project.icon;
+                                    
+                                    const titleKey = `current.items.${project.translationKey}.title`;
+                                    const descKey = `current.items.${project.translationKey}.desc`;
+                                    
+                                    const displayTitle = t(titleKey);
+                                    const displayDesc = t(descKey);
+
+                                    let displayStage = project.stageKey;
+                                    if (project.stageKey === "building") displayStage = t('current.stages.building');
+                                    else if (project.stageKey === "backend") displayStage = t('current.stages.backend');
+                                    else if (project.stageKey === "frontend") displayStage = t('current.stages.frontend');
+                                    else if (project.stageKey === "planning") displayStage = t('current.stages.planning');
+
                                     return (
                                         <Col md={6} lg={3} key={index} className="mb-4">
-                                            <div className={`now-card ${item.featured ? "featured" : ""}`}>
+                                            <div 
+                                                className={`now-card ${project.priority ? "featured" : ""}`}
+                                                onClick={() => navigate(`/working-on/${project.id}`)}
+                                                style={{ cursor: 'pointer' }}
+                                            >
                                                 <div className="now-card-header">
                                                     <div className="now-icon">
                                                         <Icon size={22} />
                                                     </div>
 
                                                     <div className="progress-wrapper">
-                                                        <span className="stage-label">{item.stage}</span>
+                                                        <span className="stage-label">{displayStage}</span>
                                                         <div className="progress-bar">
                                                             <div
                                                                 className="progress-fill"
-                                                                data-progress={item.progress}
+                                                                style={{ width: `${project.progress}%` }}
                                                             />
                                                         </div>
-
                                                     </div>
                                                 </div>
 
-                                                <h5 className="now-title">{item.title}</h5>
-                                                <p className="now-desc">{item.desc}</p>
+                                                <h5 className="now-title">{displayTitle}</h5>
+                                                <p className="now-desc">{displayDesc}</p>
                                             </div>
                                         </Col>
                                     );

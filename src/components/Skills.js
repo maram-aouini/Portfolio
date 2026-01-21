@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Container, Row, Col } from "react-bootstrap";
+import { useLanguage } from "../context/LanguageContext";
 
 // LARGE Circular Progress Meter (for the main carousel)
 const CircularMeter = ({ percentage, color = "#AA367C", isVisible }) => {
@@ -164,6 +165,7 @@ const SmallCircularMeter = ({ percentage, color = "#AA367C", isVisible }) => {
 };
 
 export const Skills = () => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -186,51 +188,58 @@ export const Skills = () => {
     },
   };
 
+  // Main Carousel Items
+  const carouselLabels = t('skills.carousel') || [];
   const carouselSkills = [
-    { name: "Back-end", percentage: 70, color: "#f07b19" },
-    { name: "Front-end", percentage: 80, color: "#2286aa" },
-    { name: "Performance & Responsiveness", percentage: 60, color: "#f07b19" },
-    { name: "UI implementation", percentage: 40, color: "#2286aa" },
-    { name: "Full-stack", percentage: 60, color: "#f07b19" },
-    { name: "CMS", percentage: 60, color: "#2286aa" },
+    { name: carouselLabels[0], percentage: 70, color: "#f07b19" },
+    { name: carouselLabels[1], percentage: 80, color: "#2286aa" },
+    { name: carouselLabels[2], percentage: 60, color: "#f07b19" },
+    { name: carouselLabels[3], percentage: 40, color: "#2286aa" },
+    { name: carouselLabels[4], percentage: 60, color: "#f07b19" },
+    { name: carouselLabels[5], percentage: 60, color: "#2286aa" },
   ];
 
-  // 4 blocks, each with 4 small skills (2x2 layout inside each block)
+  // Categories
+  const toolsData = t('skills.categories.tools') || { title: "Tools", items: [] };
+  const databasesData = t('skills.categories.databases') || { title: "Databases", items: [] };
+  const webFundamentalsData = t('skills.categories.webFundamentals') || { title: "Web Fundamentals", items: [] };
+  const backEndData = t('skills.categories.backEnd') || { title: "Back-end", items: [] };
+
   const skillCategories = [
     {
-      title: "Tools",
+      title: toolsData.title,
       skills: [
-        { name: "npm", percentage: 90, color: "#724746" },
-        { name: "Environment configs", percentage: 80, color: "#724746" },
-        { name: "Git/GitHub", percentage: 85, color: "#724746" },
-        { name: "Debugging", percentage: 95, color: "#724746" },
+        { name: toolsData.items[0], percentage: 90, color: "#724746" },
+        { name: toolsData.items[1], percentage: 80, color: "#724746" },
+        { name: toolsData.items[2], percentage: 85, color: "#724746" },
+        { name: toolsData.items[3], percentage: 95, color: "#724746" },
       ],
     },
     {
-      title: "Databases",
+      title: databasesData.title,
       skills: [
-        { name: "MySQL/SQL", percentage: 90, color: "#2286aa" },
-        { name: "Database Design Basics", percentage: 70, color: "#2286aa" },
-        { name: "CRUD Operations", percentage: 60, color: "#2286aa" },
-        { name: "Relations & Constraints", percentage: 50, color: "#2286aa" },
+        { name: databasesData.items[0], percentage: 90, color: "#2286aa" },
+        { name: databasesData.items[1], percentage: 70, color: "#2286aa" },
+        { name: databasesData.items[2], percentage: 60, color: "#2286aa" },
+        { name: databasesData.items[3], percentage: 50, color: "#2286aa" },
       ],
     },
     {
-      title: "Web Fundamentals",
+      title: webFundamentalsData.title,
       skills: [
-        { name: "Responsive Layouts", percentage: 85, color: "#616594" },
-        { name: "Accessibility Basics", percentage: 70, color: "#616594" },
-        { name: "Basic Security", percentage: 70, color: "#616594" },
+        { name: webFundamentalsData.items[0], percentage: 85, color: "#616594" },
+        { name: webFundamentalsData.items[1], percentage: 70, color: "#616594" },
+        { name: webFundamentalsData.items[2], percentage: 70, color: "#616594" },
       ],
     },
     {
-      title: "Back-end",
+      title: backEndData.title,
       skills: [
-        { name: "PHP", percentage: 90, color: "#f07b19" },
-        { name: "Laravel", percentage: 80, color: "#f07b19" },
-        { name: "REST APIs", percentage: 75, color: "#f07b19" },
-        { name: "Authentication & Authorization", percentage: 60, color: "#f07b19" },
-        { name: "Session Management", percentage: 60, color: "#f07b19" },
+        { name: backEndData.items[0], percentage: 90, color: "#f07b19" },
+        { name: backEndData.items[1], percentage: 80, color: "#f07b19" },
+        { name: backEndData.items[2], percentage: 75, color: "#f07b19" },
+        { name: backEndData.items[3], percentage: 60, color: "#f07b19" },
+        { name: backEndData.items[4], percentage: 60, color: "#f07b19" },
       ],
     },
   ];
@@ -255,12 +264,12 @@ export const Skills = () => {
         <Row>
           <Col>
             <div className="skill-bx">
-              <h2>Skills</h2>
-              <p>Full Stack Web Development with experience building structured, database-driven web applications.</p>
-              <p>Strong knowledge of HTML, CSS, JavaScript, and React for creating responsive, accessible user interfaces.</p>
-              <p>Back-end development using PHP and Laravel, including authentication, CRUD operations, and database integration with MySQL.</p>
-              <p>Experience with version control using Git and GitHub, and collaborative development workflows.</p>
-              <p>Familiar with debugging, testing, and iterative development in real-world projects.</p>
+              <h2>{t('skills.title')}</h2>
+              <p>{t('skills.p1')}</p>
+              <p>{t('skills.p2')}</p>
+              <p>{t('skills.p3')}</p>
+              <p>{t('skills.p4')}</p>
+              <p>{t('skills.p5')}</p>
 
               {/* MAIN CAROUSEL */}
               <Carousel

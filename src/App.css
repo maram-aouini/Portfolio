@@ -84,6 +84,17 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -1;
+  transition: background 0.5s ease;
+}
+
+.App.dark-theme~body::before,
+body:has(.App.dark-theme)::before {
+  background: radial-gradient(circle at 10% 20%, rgba(20, 20, 30, 1) 0%, rgba(10, 10, 15, 1) 90%);
+}
+
+.App.dark-theme {
+  background: radial-gradient(circle at 10% 20%, rgba(20, 20, 30, 1) 0%, rgba(10, 10, 15, 1) 90%);
+  min-height: 100vh;
 }
 
 /************ Section Box Styling ************/
@@ -790,6 +801,7 @@ p.danger {
   cursor: pointer !important;
 }
 
+
 .background-image-right {
   top: 20%;
   position: absolute;
@@ -798,6 +810,31 @@ p.danger {
   right: 0;
   z-index: -4;
 }
+
+/* Fix for Project Card Text on Mobile */
+@media (max-width: 768px) {
+  .proj-txtx {
+    padding: 10px 5px !important;
+  }
+
+  .proj-txtx h4 {
+    font-size: 18px !important;
+    line-height: 1.2em;
+    margin-bottom: 4px;
+  }
+
+  .proj-txtx span {
+    font-size: 13px !important;
+    line-height: 1.2em;
+    display: block;
+    /* meaningful truncation if still too long */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
 
 /* Minimal Image Modal Styling */
 .image-modal .modal-content {
@@ -1691,7 +1728,7 @@ p.danger {
 .now-updated {
   font-size: 12px;
   letter-spacing: 1px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* Card */
@@ -1721,7 +1758,7 @@ p.danger {
 .now-card:hover {
   transform: translateY(-6px) scale(1.01);
   box-shadow:
-    0 25px 60px rgba(0,0,0,0.5),
+    0 25px 60px rgba(0, 0, 0, 0.5),
     0 0 30px rgba(242, 123, 25, 0.25);
 }
 
@@ -1782,7 +1819,7 @@ p.danger {
   display: block;
   font-size: 10px;
   letter-spacing: 1px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 4px;
 }
 
@@ -1795,13 +1832,11 @@ p.danger {
 
   /* empty part */
   background:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(255,255,255,0.12),
-      rgba(255,255,255,0.12) 4px,
-      rgba(255,255,255,0.04) 4px,
-      rgba(255,255,255,0.04) 8px
-    );
+    repeating-linear-gradient(-45deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.12) 4px,
+      rgba(255, 255, 255, 0.04) 4px,
+      rgba(255, 255, 255, 0.04) 8px);
 }
 
 /* filled part */
@@ -1834,9 +1869,17 @@ p.danger {
 
 /* Pulse */
 @keyframes subtlePulse {
-  0% { box-shadow: 0 0 0 rgba(240, 123, 25, 0); }
-  50% { box-shadow: 0 0 25px rgba(240, 123, 25, 0.15); }
-  100% { box-shadow: 0 0 0 rgba(240, 123, 25, 0); }
+  0% {
+    box-shadow: 0 0 0 rgba(240, 123, 25, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(240, 123, 25, 0.15);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(240, 123, 25, 0);
+  }
 }
 
 /* Mobile */

@@ -11,16 +11,19 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { TopBanner } from "./components/TopBanner";
 import { ProjectDetail } from './components/ProjectDetail';
+import { WorkingOnDetail } from './components/WorkingOnDetail';
 import { CVPage } from "./components/CVPage";
 import { NotFound } from "./components/NotFound";
+
 
 
 // Wrapper to get location
 function AppWrapper() {
   const location = useLocation();
   const isCVPage = location.pathname === '/cv';
+  const isWorkingOnPage = location.pathname.startsWith('/working-on/');
+  const isDarkTheme = isCVPage || isWorkingOnPage;
 
-  // Set title for homepage
   useEffect(() => {
     if (location.pathname === '/') {
       document.title = "Maram | Web Developer Portfolio";
@@ -28,7 +31,7 @@ function AppWrapper() {
   }, [location.pathname]);
 
   return (
-    <div className="App">
+    <div className={`App ${isDarkTheme ? 'dark-theme' : ''}`}>
       <TopBanner />
 
       <Routes>
@@ -69,6 +72,13 @@ function AppWrapper() {
             </>
           }
         />
+        
+        <Route path="/working-on/:id" element={
+            <>
+              <header><NavBar /></header>
+              <main><WorkingOnDetail /></main>
+            </>
+        } />
 
         {/* CV PAGE */}
         <Route path="/cv" element={
@@ -83,10 +93,11 @@ function AppWrapper() {
       </Routes>
 
       {/* Footer always rendered */}
-      <Footer darkBackground={isCVPage} />
+      <Footer darkBackground={isDarkTheme} />
     </div>
   );
 }
+
 
 function App() {
   return (

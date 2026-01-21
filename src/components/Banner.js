@@ -3,9 +3,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import headerImg from "../assets/img/header-img.svg";
 import { HashLink } from "react-router-hash-link";
+import { useLanguage } from "../context/LanguageContext";
 
 export const Banner = () => {
-    const toRotate = useMemo(() => ["web developer", "web designer", "front-end developer", "back-end developer"], []);
+    const { t } = useLanguage();
+    const toRotate = useMemo(() => t('banner.roles'), [t]);
     const [loopNum, setLoopNum] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
     const [text, setText] = useState('');
@@ -51,13 +53,13 @@ export const Banner = () => {
         <div className="section-box">
           <Row className="align-items-center">
             <Col xs={12} md={6} xl={7}>
-              <span className="tagline">Welcome to my Portfolio</span>
+              <span className="tagline">{t('banner.tagline')}</span>
               <h1>
-                {`Hi! I'm Maram`}  <br />
+                {t('banner.greeting')}  <br />
                 <span className="wrap">{text}</span>
               </h1>
               <p>
-                I develop modern web applications with a focus on clean architecture, performance, and maintainable code. I care about building reliable systems, not just good-looking interfaces.
+                {t('banner.description')}
               </p>
               <HashLink smooth to="#contact">
                 <button
@@ -65,7 +67,7 @@ export const Banner = () => {
                   className="vvd"
                   onClick={() => console.log("connect")}
                 >
-                  Let's Connect <ArrowRightCircle size={25} />
+                  {t('banner.connect')} <ArrowRightCircle size={25} />
                 </button>
               </HashLink>
             </Col>

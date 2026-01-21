@@ -1,0 +1,446 @@
+/* =========================================
+   workingOn.css
+   Restructured Bento Grid & Smart Roadmap
+   ================================********* */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --neon-primary: #f07b19;
+    --neon-secondary: #2286aa;
+    --text-main: #f0eee9;
+    --text-muted: #a0a0a0;
+    --success-glow: #27c93f;
+}
+
+/* --- Global Page Wrapper --- */
+.working-on-page {
+    min-height: calc(100vh - 200px);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: var(--text-main);
+    position: relative;
+    z-index: 1;
+    overflow-x: hidden;
+}
+
+.working-on-page::before,
+.working-on-page::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.working-on-page::before {
+    top: -20%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(240, 123, 25, 0.05) 0%, transparent 70%);
+}
+
+.working-on-page::after {
+    bottom: -10%;
+    right: -5%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(34, 134, 170, 0.06) 0%, transparent 70%);
+}
+
+/* --- Layout Header --- */
+.detail-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- Bento Grid (Restructured) --- */
+.bento-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.bento-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 35px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bento-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Hover Glows */
+.bento-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.06), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bento-card:hover::after {
+    opacity: 1;
+}
+
+.card-stats:hover {
+    box-shadow: 0 0 30px rgba(34, 134, 170, 0.15);
+}
+
+.card-overview:hover {
+    box-shadow: 0 0 30px rgba(240, 123, 25, 0.15);
+}
+
+/* Assignments */
+.card-overview {
+    grid-column: span 5;
+    grid-row: span 4;
+}
+
+.card-hero {
+    grid-column: span 7;
+    grid-row: span 4;
+}
+
+.card-progress-full {
+    grid-column: span 12;
+    padding: 40px;
+}
+
+.card-roadmap-v {
+    grid-column: span 7;
+}
+
+.card-stats {
+    grid-column: span 5;
+}
+
+@media (max-width: 991px) {
+
+    .card-overview,
+    .card-hero,
+    .card-progress-full,
+    .card-roadmap-v,
+    .card-stats {
+        grid-column: span 12;
+        grid-row: auto;
+    }
+}
+
+/* --- Typography --- */
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.section-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--neon-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- Visual Hero Module --- */
+.hero-visual-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.code-split-hero {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+}
+
+.code-window-premium {
+    flex: 6;
+    background: #0d0d0d;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.window-header {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.red {
+    background: #ff5f56;
+}
+
+.dot.yellow {
+    background: #ffbd2e;
+}
+
+.dot.green {
+    background: #27c93f;
+}
+
+.code-content-wrapper {
+    display: flex;
+    flex: 1;
+    overflow: auto;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    padding: 15px 0;
+}
+
+.line-numbers {
+    padding: 0 12px;
+    text-align: right;
+    color: #444;
+    user-select: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    margin-right: 15px;
+}
+
+.code-window-premium pre {
+    margin: 0;
+    color: #d1d1d1;
+}
+
+.preview-side {
+    flex: 4;
+    background: radial-gradient(circle at center, rgba(240, 123, 25, 0.05), transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.preview-label {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+.mockup-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+/* --- Progress Module (Full Width) --- */
+.progress-inner-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.progress-large-text {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--neon-primary);
+    min-width: 140px;
+}
+
+.progress-track-wide {
+    flex: 1;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill-wide {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-primary), #ff9f43);
+    box-shadow: 0 0 20px rgba(240, 123, 25, 0.4);
+    width: 0;
+    animation: fillProgress 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- Smart Roadmap (Vertical) --- */
+.roadmap-v-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.roadmap-step-v {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.step-status-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.step-status-icon.completed {
+    background: rgba(39, 201, 63, 0.1);
+    border-color: var(--success-glow);
+    color: var(--success-glow);
+}
+
+.step-status-icon.current {
+    background: rgba(240, 123, 25, 0.1);
+    border-color: var(--neon-primary);
+    color: var(--neon-primary);
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(240, 123, 25, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(240, 123, 25, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(240, 123, 25, 0);
+    }
+}
+
+.step-v-text {
+    flex: 1;
+    padding-top: 4px;
+}
+
+.step-v-text.completed {
+    color: #888;
+    text-decoration: none;
+}
+
+.step-v-text.current {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* --- Stats Module --- */
+.stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: #fff;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+/* --- Syntax Highlighting (High Contrast) --- */
+.syntax-kw {
+    color: #ff9f43;
+    /* Brighter Orange */
+    font-weight: 600;
+}
+
+.syntax-str {
+    color: #48c6ef;
+    /* Bright Blue */
+}
+
+.syntax-fn {
+    color: #27c93f;
+    /* Success Green */
+}
+
+/* --- Common UI --- */
+.status-badge-glow {
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: rgba(240, 123, 25, 0.1);
+    border: 1px solid rgba(240, 123, 25, 0.3);
+    color: var(--neon-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.btn-back-glow {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-back-glow:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-color: #fff;
+}

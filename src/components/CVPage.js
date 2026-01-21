@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CVNavBar } from "./CVNavBar";
 import './CVPage.css';
+import { useLanguage } from "../context/LanguageContext";
 
 import fastfrwrdLogo from '../assets/img/companies/fastfrwrd-logo.png';
 import adeccoLogo from '../assets/img/companies/adecco-logo.png';
@@ -12,6 +13,7 @@ import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 
 export const CVPage = () => {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [sidebarMinimized, setSidebarMinimized] = useState(window.innerWidth <= 1200);
 
@@ -29,6 +31,29 @@ export const CVPage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const languages = t('cv.languages.items') || [];
+  const languageLevels = t('cv.languages.levels') || {};
+  const certifications = t('cv.certifications.items') || [];
+  const strengths = t('cv.strengths.items') || [];
+  const focusAreas = t('cv.focus.items') || [];
+  const experienceData = t('cv.experience.items') || [];
+
+  const experienceLogos = [fastfrwrdLogo, adeccoLogo, enelLogo, humangestLogo];
+  const experienceDates = [
+    'Oct 2025 - Jan 2026', 'Feb 2024 - Feb 2025', 'Apr 2023 - Jul 2023', 'Oct 2021 - Mar 2022'
+  ];
+  const experienceCompanies = [
+    'FastFRWRD Agency, Malta', 'Adecco Italia S.p.A, Amazon', 'OpenJob S.p.A, Enel Energia', 'Humangest S.p.A, SKY'
+  ];
+
+  const experience = experienceData.map((item, index) => ({
+    ...item,
+    logo: experienceLogos[index],
+    date: experienceDates[index],
+    company: experienceCompanies[index]
+  }));
+
+
   return (
     <>
       <CVNavBar />
@@ -39,7 +64,7 @@ export const CVPage = () => {
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
-        Back to Portfolio
+        {t('cv.backButton')}
       </button>
 
       <main className="cv-page-wrapper" role="main">
@@ -59,7 +84,7 @@ export const CVPage = () => {
                   />
                 </div>
                 <h1 className="cv-name">MARAM AOUINI</h1>
-                <p className="cv-role">Full Stack Web Developer</p>
+                <p className="cv-role">{t('cv.role')}</p>
 
                 <div className="cv-social-icons">
                   <a href="/" className="cv-social-icon home-icon" aria-label="Home">
@@ -83,7 +108,7 @@ export const CVPage = () => {
                   className="cv-download-btn"
                   style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}
                 >
-                  DOWNLOAD RESUME
+                  {t('cv.download')}
                 </a>
               </div>
             )}
@@ -94,10 +119,11 @@ export const CVPage = () => {
 
               {/* SUMMARY */}
               <section id="summary" className="cv-about-section">
-                <h2 className="cv-section-title">ABOUT ME</h2>
-                <p className="cv-intro-text">Hello, I'm Maram Aouini!</p>
+                <h2 className="cv-section-title">{t('cv.about.title')}</h2>
+                <p className="cv-intro-text">{t('cv.about.greeting')}</p>
                 <p className="cv-about-text">
-                  I am a Full Stack Web Developer focused on building reliable, user-friendly web applications using React, PHP, Laravel, and MySQL. I hold certifications in Full Stack and Back End Development from Talentform and have hands-on experience working with real-world projects. <br /> <br />Coming from a background in technical assistance and customer service, I combine strong problem-solving skills with clear communication and a user-centric mindset. I enjoy turning complex requirements into clean, maintainable solutions that actually work.
+                  {t('cv.about.p1')} <br /> <br />
+                  {t('cv.about.p2')}
                 </p>
                 <div className="cv-signature">Maram Aouini</div>
               </section>
@@ -105,37 +131,31 @@ export const CVPage = () => {
               {/* PERSONAL INFO AND LANGUAGES */}
               <section className="cv-info-grid" aria-label="Personal Info and Languages">
                 <div className="cv-info-column">
-                  <h3 className="cv-info-heading">personal information</h3>
+                  <h3 className="cv-info-heading">{t('cv.personalInfo.title')}</h3>
                   <div className="cv-info-list">
-                    <div className="cv-info-row"><span className="cv-label">FULL NAME</span><span className="cv-value">Maram Aouini</span></div>
-                    <div className="cv-info-row"><span className="cv-label">D.O.B.</span><span className="cv-value">13 May 2000</span></div>
-                    <div className="cv-info-row"><span className="cv-label">ADDRESS</span><span className="cv-value">Pescara, Italy</span></div>
-                    <div className="cv-info-row"><span className="cv-label">E-MAIL</span><span className="cv-value">maramaouini.l@gmail.com</span></div>
-                    <div className="cv-info-row"><span className="cv-label">PHONE</span><span className="cv-value">+39 334 112 1820</span></div>
-                    <div className="cv-info-row"><span className="cv-label">FREELANCE</span><span className="cv-value">Available</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.name')}</span><span className="cv-value">Maram Aouini</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.dob')}</span><span className="cv-value">13 May 2000</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.address')}</span><span className="cv-value">Pescara, Italy</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.email')}</span><span className="cv-value">maramaouini.l@gmail.com</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.phone')}</span><span className="cv-value">+39 334 112 1820</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.freelance')}</span><span className="cv-value">{t('cv.personalInfo.values.freelance')}</span></div>
                   </div>
                 </div>
 
                 <div className="cv-info-column" id="skills">
-                  <h3 className="cv-info-heading">languages</h3>
+                  <h3 className="cv-info-heading">{t('cv.languages.title')}</h3>
                   <div className="cv-languages">
                     {[
-                      { name: 'English', level: 8 },
-                      { name: 'Italian', level: 10 },
-                      { name: 'Arabic', level: 10 },
-                      { name: 'Chinese', level: 2 }
+                      { name: languages[0]?.name || 'English', level: 8, levelText: languageLevels.fluent },
+                      { name: languages[1]?.name || 'Italian', level: 10, levelText: languageLevels.native },
+                      { name: languages[2]?.name || 'Arabic', level: 10, levelText: languageLevels.native },
+                      { name: languages[3]?.name || 'Chinese', level: 2, levelText: languageLevels.beginner }
                     ].map((lang, i) => (
                       <div key={i} className="cv-language-item">
                         <div className="cv-lang-header">
                           <span className="cv-lang-name">{lang.name}</span>
                           <span className="cv-lang-level">
-                            {lang.level === 10
-                              ? 'native'
-                              : lang.level >= 8
-                                ? 'fluent'
-                                : lang.level >= 3
-                                  ? 'intermediate'
-                                  : 'beginner'}
+                            {lang.levelText}
                           </span>
 
                         </div>
@@ -153,17 +173,14 @@ export const CVPage = () => {
 
               {/* CERTIFICATIONS & TRAINING */}
               <section id="certifications" className="cv-section">
-                <h2 className="cv-section-title">CERTIFICATIONS & TRAINING</h2>
-                {[
-                  { title: 'Full Stack Web Developer', date: '2025', org: 'Talentform', desc: 'Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL.' },
-                  { title: 'Back End Developer', date: '2025', org: 'Talentform', desc: 'Focused curriculum on server-side programming, database management, API development, and security best practices.' }
-                ].map((cert, i) => (
+                <h2 className="cv-section-title">{t('cv.certifications.title')}</h2>
+                {certifications.map((cert, i) => (
                   <div key={i} className="cv-item">
                     <div className="cv-item-header">
                       <h3 className="cv-item-title">{cert.title}</h3>
-                      <span className="cv-date">{cert.date}</span>
+                      <span className="cv-date">2025</span>
                     </div>
-                    <div className="cv-company">{cert.org}</div>
+                    <div className="cv-company">Talentform</div>
                     <p>{cert.desc}</p>
                   </div>
                 ))}
@@ -171,23 +188,21 @@ export const CVPage = () => {
 
               {/* KEY TECHNICAL STRENGTHS */}
               <section className="cv-section" aria-label="Key Technical Strengths">
-                <h2 className="cv-section-title">KEY TECHNICAL STRENGTHS</h2>
+                <h2 className="cv-section-title">{t('cv.strengths.title')}</h2>
                 <ul className="cv-styled-list strength-list">
-                  <li>Ability to translate requirements into functional web solutions</li>
-                  <li>Strong problem-solving approach to debugging and errors</li>
-                  <li>Experience working with full authentication flows</li>
-                  <li>User-focused mindset from customer support background</li>
+                  {strengths.map((item, i) => (
+                      <li key={i}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
               {/* CURRENT TECHNICAL FOCUS */}
               <section className="cv-section" aria-label="Current Technical Focus">
-                <h2 className="cv-section-title">CURRENT TECHNICAL FOCUS</h2>
+                <h2 className="cv-section-title">{t('cv.focus.title')}</h2>
                 <ul className="cv-styled-list focus-list">
-                  <li>Improving Laravel authentication and database relationships</li>
-                  <li>Strengthening React component architecture</li>
-                  <li>Practicing clean, maintainable code patterns</li>
-                  <li>Exploring performance optimization and best practices</li>
+                  {focusAreas.map((item, i) => (
+                      <li key={i}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
@@ -196,13 +211,8 @@ export const CVPage = () => {
 
               {/* EXPERIENCE */}
               <section id="experience" className="cv-experience-section">
-                <h2 className="cv-section-title">WORK EXPERIENCE</h2>
-                {[
-                  { date: 'Oct 2025 - Jan 2026', title: 'Web Designer', company: 'FastFRWRD Agency, Malta', logo: fastfrwrdLogo, desc: `Contributed to web development projects for an international startup during an Erasmus traineeship. Built and customized responsive websites using Framer and WordPress, with rapid prototyping and testing via Replit in a remote team environment.` },
-                  { date: 'Feb 2024 - Feb 2025', title: 'Warehouse Worker', company: 'Adecco Italia S.p.A, Amazon', logo: adeccoLogo, desc: `Package management and goods handling through digital systems. Warehouse organization, compliance with safety procedures, and operational problem resolution.` },
-                  { date: 'Apr 2023 - Jul 2023', title: 'Call Center, Technical Assistance', company: 'OpenJob S.p.A, Enel Energia', logo: enelLogo, desc: `Technical assistance via inbound calls for electricity and gas utilities, invoice analysis, consumption monitoring, tariff plans, and energy sector documentation management.` },
-                  { date: 'Oct 2021 - Mar 2022', title: 'Call Center, Technical Assistance', company: 'Humangest S.p.A, SKY', logo: humangestLogo, desc: `Technical assistance via inbound calls, invoice analysis, PayTV troubleshooting, TV schedule information, packages and documentation related to pay TV, CAM and various decoders.` }
-                ].map((exp, i) => (
+                <h2 className="cv-section-title">{t('cv.experience.title')}</h2>
+                {experience.map((exp, i) => (
                   <div key={i} className="cv-experience-item">
                     <div className="cv-exp-date"><span className="cv-date-badge">{exp.date}</span></div>
                     <div className="cv-exp-content">

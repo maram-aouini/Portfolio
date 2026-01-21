@@ -3,29 +3,40 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Modal, Carousel } from "react-bootstrap";
 import { projectsData } from "../data/projectsData";
 import { ArrowLeft, ArrowRight, ExternalLink, Check, Github } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const { t } = useLanguage();
 
   const project = projectsData.find(p => p.id === parseInt(id));
 
+  const transProject = t(`projects_content.${id}`);
+  
+  const title = transProject?.title || project?.title;
+  const fullDescription = transProject?.fullDescription || project?.fullDescription;
+  const psa = transProject?.psa || project?.psa;
+  const learned = transProject?.learned || project?.learned;
+  const statusLabel = project?.status === "live" ? t('projects.status.live') : 
+                      project?.status === "wip" ? t('projects.status.wip') :
+                      project?.status === "completed" ? t('projects.status.completed') :
+                      t('projects.status.placeholder');
+
   useEffect(() => {
-    // Update page title
     if (project) {
-      document.title = `${project.title} | Maram Portfolio`;
+      document.title = `${title} | Maram Portfolio`;
     } else {
       document.title = "Project Not Found | Maram Portfolio";
     }
 
-    // Scroll to top
     const scrollTop = () => window.scrollTo(0, 0);
     const timeout = setTimeout(scrollTop, 50);
     
     return () => clearTimeout(timeout);
-  }, [id, project]);
+  }, [id, project, title]);
 
   if (!project) {
     return (
@@ -64,7 +75,7 @@ export const ProjectDetail = () => {
                         <Carousel.Item key={index}>
                           <img
                             src={img}
-                            alt={`${project.title} - ${index + 1}`}
+                            alt={`${title} - ${index + 1}`}
                             className="project-img"
                             onClick={() => {
                               setActiveIndex(index);
@@ -84,17 +95,17 @@ export const ProjectDetail = () => {
                 <Col lg={6}>
                   <div className="project-info">
                     <div className="project-title-wrapper mb-4">
-                      <h1 className="project-title">{project.title}</h1>
-                      {project.status && <span className={`status-badge-detail ${project.status}`}>{project.status}</span>}
+                      <h1 className="project-title">{title}</h1>
+                      {project.status && <span className={`status-badge-detail ${project.status}`}>{statusLabel}</span>}
                     </div>
-                    {project.fullDescription && project.fullDescription.length > 0 &&
-                      project.fullDescription.map((item, index) => (
+                    {fullDescription && fullDescription.length > 0 &&
+                      fullDescription.map((item, index) => (
                         <p key={index} className="project-desc mb-4">{item}</p>
                       ))
                     }
 
                     <div className="technologies mb-4">
-                      <h4 className="mb-3">Technologies Used:</h4>
+                      <h4 className="mb-3">{t('projects.headers.technologies')}</h4>
                       <div className="tech-badges">
                         {project.technologies.map((tech, index) => (
                           <span key={index} className="tech-badge">
@@ -113,7 +124,7 @@ export const ProjectDetail = () => {
                           className="project-link-btn primary"
                         >
                           <ExternalLink size={20} className="me-2" />
-                          View Live
+                          {t('projects.headers.viewLive')}
                         </a>
                       )}
 
@@ -125,7 +136,7 @@ export const ProjectDetail = () => {
                           className="project-link-btn secondary"
                         >
                           <Github size={20} className="me-2" />
-                          View Source
+                          {t('projects.headers.viewSource')}
                         </a>
                       )}
                     </div>
@@ -134,28 +145,28 @@ export const ProjectDetail = () => {
               </Row>
 
               {/* PSA Section */}
-              {project.psa && (project.psa.problem || project.psa.solution || project.psa.outcome) && (
+              {psa && (psa.problem || psa.solution || psa.outcome) && (
                 <div className="project-psa mt-5">
                   <h2 className="project-psa-title d-none d-md-block">
-                    Problem → Solution → Outcome
+                    {t('projects.headers.problem')} → {t('projects.headers.solution')} → {t('projects.headers.outcome')}
                   </h2>
 
                   {/* Mobile vertical title */}
                   <h2 className="project-psa-title-vertical d-none d-md-none text-center mb-4">
-                    <span>Problem</span>
+                    <span>{t('projects.headers.problem')}</span>
                     <span className="title-arrow">↓</span>
-                    <span>Solution</span>
+                    <span>{t('projects.headers.solution')}</span>
                     <span className="title-arrow">↓</span>
-                    <span>Outcome</span>
+                    <span>{t('projects.headers.outcome')}</span>
                   </h2>
 
                   <div className="project-psa-row">
                     {["problem", "solution", "outcome"].map((key, idx) => (
-                      project.psa[key] && (
+                      psa[key] && (
                         <div key={idx} className="psa-item-wrapper">
                           <div className="psa-item text-center">
-                            <h3 className="psa-title">{key.charAt(0).toUpperCase() + key.slice(1)}</h3>
-                            <p className="psa-text">{project.psa[key]}</p>
+                            <h3 className="psa-title">{t(`projects.headers.${key}`)}</h3>
+                            <p className="psa-text">{psa[key]}</p>
                           </div>
 
                           {/* Mobile arrow */}
@@ -171,11 +182,11 @@ export const ProjectDetail = () => {
               )}
 
               {/* What I Learned Section */}
-              {project.learned && project.learned.length > 0 && (
+              {learned && learned.length > 0 && (
                 <div className="project-learned mt-5">
-                  <h2>What I Learned</h2>
+                  <h2>{t('projects.headers.learned')}</h2>
                   <ul className="learned-list">
-                    {project.learned.map((item, idx) => (
+                    {learned.map((item, idx) => (
                       <li key={idx}>
                         <Check size={20} strokeWidth={5} /> {item}
                       </li>
@@ -191,7 +202,7 @@ export const ProjectDetail = () => {
                     className="back-btn"
                   >
                     <ArrowLeft size={20} className="me-2" />
-                    Back to Projects
+                    {t('projects.headers.back')}
                   </Button>
                 </Col>
               </Row>
@@ -228,7 +239,7 @@ export const ProjectDetail = () => {
               <Carousel.Item key={index}>
                 <img
                   src={img}
-                  alt={`${project.title} enlarged ${index + 1}`}
+                  alt={`${title} enlarged ${index + 1}`}
                   style={{
                     width: '100%',
                     height: 'auto',

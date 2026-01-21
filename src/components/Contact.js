@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import { useLanguage } from "../context/LanguageContext";
 
 export const Contact = () => {
+  const { t } = useLanguage();
   const formInitialDetails = {
     firstName: '',
     lastName: '',
@@ -14,8 +16,15 @@ export const Contact = () => {
   };
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
-  const [buttonText, setButtonText] = useState('Send');
+  const [buttonText, setButtonText] = useState(t('contact.button.send'));
   const [status, setStatus] = useState({});
+
+  // Reset button text when language changes, unless currently sending
+  useEffect(() => {
+    if (buttonText !== t('contact.button.sending')) {
+        setButtonText(t('contact.button.send'));
+    }
+  }, [t, buttonText]);
 
   const onFormUpdate = (category, value) => {
     setFormDetails({
@@ -43,14 +52,14 @@ export const Contact = () => {
 
   // If fields are not compiled, send an error message
   if (!validateForm()) {
-    setStatus({ success: false, message: "Please complete all fields." });
+    setStatus({ success: false, message: t('contact.messages.incomplete') });
     return;
   }
 
-  setButtonText("Sending...");
+  setButtonText(t('contact.button.sending'));
 
   try {
-    let response = await fetch("/.netlify/functions/contact", {  // ✅ Changed URL
+    let response = await fetch("/.netlify/functions/contact", { 
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -58,18 +67,18 @@ export const Contact = () => {
       body: JSON.stringify(formDetails),
     });
 
-    setButtonText("Send");
+    setButtonText(t('contact.button.send'));
     let result = await response.json();
     setFormDetails(formInitialDetails);
 
     if (result.code === 200) {
-      setStatus({ success: true, message: "Message sent successfully!" });
+      setStatus({ success: true, message: t('contact.messages.success') });
     } else {
-      setStatus({ success: false, message: "Something went wrong, please try again later." });
+      setStatus({ success: false, message: t('contact.messages.error') });
     }
   } catch (error) {
-    setButtonText("Send");
-    setStatus({ success: false, message: "Something went wrong, please try again later." });
+    setButtonText(t('contact.button.send'));
+    setStatus({ success: false, message: t('contact.messages.error') });
   }
 };
 
@@ -95,7 +104,7 @@ export const Contact = () => {
               <TrackVisibility once>
                 {({ isVisible }) =>
                   <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                    <h2>Get In Touch</h2>
+                    <h2>{t('contact.title')}</h2>
 
                     <form onSubmit={handleSubmit} netlify>
                       <Row>
@@ -104,7 +113,7 @@ export const Contact = () => {
                           <input
                             type="text"
                             value={formDetails.firstName}
-                            placeholder="First Name"
+                            placeholder={t('contact.placeholders.firstName')}
                             onChange={(e) => onFormUpdate('firstName', e.target.value)}
                           />
                         </Col>
@@ -113,7 +122,7 @@ export const Contact = () => {
                           <input
                             type="text"
                             value={formDetails.lastName}
-                            placeholder="Last Name"
+                            placeholder={t('contact.placeholders.lastName')}
                             onChange={(e) => onFormUpdate('lastName', e.target.value)}
                           />
                         </Col>
@@ -122,7 +131,7 @@ export const Contact = () => {
                           <input
                             type="email"
                             value={formDetails.email}
-                            placeholder="Email Address"
+                            placeholder={t('contact.placeholders.email')}
                             onChange={(e) => onFormUpdate('email', e.target.value)}
                           />
                         </Col>
@@ -131,7 +140,7 @@ export const Contact = () => {
                           <input
                             type="tel"
                             value={formDetails.phone}
-                            placeholder="Phone No."
+                            placeholder={t('contact.placeholders.phone')}
                             onChange={(e) => onFormUpdate('phone', e.target.value)}
                           />
                         </Col>
@@ -140,7 +149,7 @@ export const Contact = () => {
                           <textarea
                             rows="6"
                             value={formDetails.message}
-                            placeholder="Message"
+                            placeholder={t('contact.placeholders.message')}
                             onChange={(e) => onFormUpdate('message', e.target.value)}
                           ></textarea>
 
@@ -149,7 +158,7 @@ export const Contact = () => {
                               <span>{buttonText}</span>
                             </button>
 
-                            {/* ✅ MESSAGGIO DI ERRORE/SUCCESSO */}
+                            {/* ERROR/SUCCESS MESSAGE */}
                             {status.message && (
                               <div className={`status-message-wrapper animate__animated animate__fadeInUp mt-3 ${status.success === false ? "status-danger" : "status-success"}`}>
                                 <p>{status.message}</p>

@@ -102,7 +102,6 @@
   }
 }
 
-/* Shake effect - keeps box visible */
 .notfound-box.shaking {
   animation: shakeBox 0.5s cubic-bezier(0.36, 0.66, 0.04, 1) !important;
   opacity: 1 !important;

@@ -1,6 +1,8 @@
 // src/components/CVNavBar.jsx
 import { useState, useEffect } from "react";
 import { HashLink } from "react-router-hash-link";
+import { useLanguage } from "../context/LanguageContext";
+import { ItFlag, UkFlagSimple } from "./Flags";
 
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
@@ -9,6 +11,7 @@ import navIcon3 from "../assets/img/nav-icon3.svg";
 export const CVNavBar = () => {
   const [activeLink, setActiveLink] = useState("summary");
   const [menuOpen, setMenuOpen] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -24,9 +27,8 @@ export const CVNavBar = () => {
     const onScroll = () => {
       // Sections on CV Page in DOM order
       const sections = ["summary", "skills", "experience", "certifications"];
-      const scrollPos = window.scrollY + 400; // Increased offset for better detection
+      const scrollPos = window.scrollY + 400;
 
-      // Check if we are at the bottom of the page
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
 
       if (isAtBottom) {
@@ -103,21 +105,6 @@ export const CVNavBar = () => {
         </a>
 
         <a
-          href="#skills"
-          className={`nav-icon-link ${activeLink === "skills" ? "active" : ""}`}
-          onClick={() => onUpdateActiveLink("skills")}
-          title="Languages"
-        >
-          {/* Globe icon for Languages */}
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-          </svg>
-          <span className="tooltip">Languages</span>
-        </a>
-
-        <a
           href="#experience"
           className={`nav-icon-link ${activeLink === "experience" ? "active" : ""}`}
           onClick={() => onUpdateActiveLink("experience")}
@@ -152,9 +139,20 @@ export const CVNavBar = () => {
           </svg>
           <span className="tooltip">Certifications</span>
         </a>
-      </div>
 
-      {/* same menu / socials dropdown as homepage */}
+        {/* LANGUAGE TOGGLE BUTTON */}
+        <button 
+            className="nav-icon-link language-toggle" 
+            onClick={toggleLanguage}
+            title="Switch Language"
+        >
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {language === 'en' ? <ItFlag size={20} /> : <UkFlagSimple size={20} />}
+            </span>
+            <span className="tooltip">{language === 'en' ? 'Italiano' : 'English'}</span>
+        </button>
+      </div>
+{/* cv NAVBAR */}
       <div className="menu-container">
         <button
           className={`menu-toggle ${menuOpen ? "open" : ""}`}
@@ -179,6 +177,12 @@ export const CVNavBar = () => {
         </button>
 
         <div className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
+           <div className="language-switch-mobile" style={{textAlign: 'center', marginBottom: '15px'}}>
+               <button onClick={toggleLanguage} className="vvd" style={{padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', margin: '0 auto'}}>
+                  <span>{language === 'en' ? 'Switch to Italian' : 'Switch to English'}</span>
+                  {language === 'en' ? <ItFlag size={20} /> : <UkFlagSimple size={20} />}
+               </button>
+          </div>
           <div className="social-icons-dropdown">
             <a
               href="https://www.linkedin.com/in/maramaouini/"
