@@ -8,6 +8,7 @@ import { UkFlagSimple, ItFlag } from './Flags';
 
 // Import themed styles
 import "./WorkingOn.css";
+import { NotFound } from "./NotFound";
 
 const CodeSnippetHero = () => {
   const { language, toggleLanguage } = useLanguage();
@@ -107,14 +108,7 @@ export const WorkingOnDetail = () => {
   }, []);
 
   if (!project) {
-    return (
-      <div className="working-on-page d-flex align-items-center justify-content-center">
-         <div className="text-center bento-card" style={{ maxWidth: '400px' }}>
-            <h2 className="text-white mb-4">Project not found</h2>
-            <Button variant="outline-light" onClick={() => navigate('/')}>Back Home</Button>
-         </div>
-      </div>
-    );
+    return <NotFound />;
   }
 
   const transKey = project.translationKey;

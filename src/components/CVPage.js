@@ -134,7 +134,7 @@ export const CVPage = () => {
                   <h3 className="cv-info-heading">{t('cv.personalInfo.title')}</h3>
                   <div className="cv-info-list">
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.name')}</span><span className="cv-value">Maram Aouini</span></div>
-                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.dob')}</span><span className="cv-value">13 May 2000</span></div>
+                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.dob')}</span><span className="cv-value">{t('cv.personalInfo.values.dob')}</span></div>
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.address')}</span><span className="cv-value">Pescara, Italy</span></div>
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.email')}</span><span className="cv-value">maramaouini.l@gmail.com</span></div>
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.phone')}</span><span className="cv-value">+39 334 112 1820</span></div>

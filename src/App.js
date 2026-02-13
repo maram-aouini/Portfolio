@@ -40,13 +40,13 @@ function AppWrapper() {
           <>
             <header><NavBar /></header>
             <div className="sakura-container">
-              {Array.from({ length: 40 }).map((_, i) => (
+              {Array.from({ length: 25 }).map((_, i) => (
                 <div
                   key={i}
                   className="sakura-petal"
                   style={{
-                    left: `${i * 2.5}%`,
-                    animationDelay: `-${i * 0.3}s`,
+                    left: `${i * 4}%`,
+                    animationDelay: `-${i * 0.5}s`,
                     animationDuration: `${12 + (i % 3) * 4}s`
                   }}
                 />

@@ -15,7 +15,7 @@ export const translations = {
       connect: "Let's Connect"
     },
     topBanner: {
-      message: "This portfolio is currently being updated. Some features may be incomplete, but feel free to explore."
+      message: "This portfolio is currently being updated. Some features may be incomplete, but feel free to explore!"
     },
     skills: {
       title: "Skills",
@@ -62,12 +62,14 @@ export const translations = {
         firstName: "First Name",
         lastName: "Last Name",
         email: "Email Address",
+        phonePrefix: "Prefix",
         phone: "Phone No.",
         message: "Message"
       },
       button: { send: "Send", sending: "Sending..." },
       messages: {
         incomplete: "Please complete all fields.",
+        invalidEmail: "Please enter a valid email address.",
         success: "Message sent successfully!",
         error: "Something went wrong, please try again later."
       }
@@ -107,10 +109,11 @@ export const translations = {
           address: "ADDRESS",
           email: "E-MAIL",
           phone: "PHONE",
-          freelance: "FREELANCE"
+          freelance: "WORK AVAILABILITY"
         },
         values: {
-          freelance: "Available"
+          freelance: "Available",
+          dob: "13 May 2000"
         }
       },
       languages: {
@@ -119,12 +122,12 @@ export const translations = {
           { name: "English" },
           { name: "Italian" },
           { name: "Arabic" },
-          { name: "Chinese" }
+          { name: "Japanese" }
         ],
         levels: { native: "native", fluent: "fluent", intermediate: "intermediate", beginner: "beginner" }
       },
       certifications: {
-        title: "CERTIFICATIONS & TRAINING",
+        title: "CERTIFICATIONS",
         items: [
           { title: "Full Stack Web Developer", desc: "Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL." },
           { title: "Back End Developer", desc: "Focused curriculum on server-side programming, database management, API development, and security best practices." }
@@ -277,17 +280,17 @@ export const translations = {
       skills: "Competenze",
       projects: "Progetti",
       cv: "CV",
-      connect: "Connettiamoci"
+      connect: "Contattami"
     },
     banner: {
       tagline: "Benvenuto nel mio Portfolio",
       greeting: "Ciao! Sono Maram",
       roles: ["sviluppatrice web", "web designer", "sviluppatrice front-end", "sviluppatrice back-end"],
       description: "Sviluppo applicazioni web moderne concentrandomi su architettura pulita, prestazioni e codice manutenibile. Mi preoccupo di costruire sistemi affidabili, non solo interfacce belle da vedere.",
-      connect: "Connettiamoci"
+      connect: "Contattami"
     },
     topBanner: {
-      message: "Questo portfolio è attualmente in aggiornamento. Alcune funzionalità potrebbero essere incomplete, ma sentiti libero di esplorare."
+      message: "Questo portfolio è attualmente in aggiornamento. Alcune funzionalità potrebbero essere incomplete, ma sentiti libero di esplorare!"
     },
     skills: {
       title: "Competenze",
@@ -334,12 +337,14 @@ export const translations = {
         firstName: "Nome",
         lastName: "Cognome",
         email: "Indirizzo Email",
+        phonePrefix: "Prefisso",
         phone: "N. Telefono",
         message: "Messaggio"
       },
       button: { send: "Invia", sending: "Invio in corso..." },
       messages: {
         incomplete: "Per favore compila tutti i campi.",
+        invalidEmail: "Per favore inserisci un indirizzo email valido.",
         success: "Messaggio inviato con successo!",
         error: "Qualcosa è andato storto, per favore riprova più tardi."
       }
@@ -374,15 +379,16 @@ export const translations = {
       personalInfo: {
         title: "informazioni personali",
         labels: {
-          name: "NOME COMPLETO",
+          name: "NOME",
           dob: "DATA DI NASCITA",
           address: "INDIRIZZO",
           email: "E-MAIL",
           phone: "TELEFONO",
-          freelance: "FREELANCE"
+          freelance: "DISPONIBILITÀ"
         },
         values: {
-          freelance: "Disponibile"
+          freelance: "Disponibile",
+          dob: "13 Maggio 2000"
         }
       },
       languages: {
@@ -391,12 +397,12 @@ export const translations = {
           { name: "Inglese" },
           { name: "Italiano" },
           { name: "Arabo" },
-          { name: "Cinese" }
+          { name: "Giapponese" }
         ],
         levels: { native: "madrelingua", fluent: "fluente", intermediate: "intermedio", beginner: "base" }
       },
       certifications: {
-        title: "CERTIFICAZIONI E FORMAZIONE",
+        title: "CERTIFICAZIONI",
         items: [
           { title: "Sviluppatore Web Full Stack", desc: "Formazione completa in tecnologie web moderne inclusi HTML5, CSS3, JavaScript ES6+, React, PHP e MySQL." },
           { title: "Sviluppatore Back End", desc: "Curriculum focalizzato su programmazione server-side, gestione database, sviluppo API e best practices di sicurezza." }

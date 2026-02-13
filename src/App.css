@@ -110,6 +110,12 @@ body:has(.App.dark-theme)::before {
   border-radius: 30px;
   margin: 20px auto;
   padding: 60px 40px;
+  will-change: transform, opacity;
+}
+
+.hide-on-load {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 h1,
@@ -830,6 +836,7 @@ p.danger {
     /* meaningful truncation if still too long */
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -963,24 +970,231 @@ p.danger {
 }
 
 .contact form input,
-.contact form textarea {
+.contact form textarea,
+.contact form select {
   width: 100%;
   background: rgba(240, 238, 233, 0.2);
   border: 1px solid rgba(240, 238, 233, 0.5);
   border-radius: 20px;
   color: #f0eee9;
   margin: 0 0 8px 0;
-  padding: 18px 26px;
+  padding: 14px 22px;
   font-weight: 500;
-  font-size: 18px;
-  letter-spacing: 0.8px;
+  font-size: 16px;
+  letter-spacing: 0.6px;
   transition: 0.3s ease-in-out;
 }
 
+.contact form select option {
+  background: #121212;
+  color: #f0eee9;
+}
+
+.phone-input-group {
+  display: flex;
+  background: rgba(240, 238, 233, 0.2);
+  border: 1px solid rgba(240, 238, 233, 0.5);
+  border-radius: 20px;
+  overflow: visible;
+  /* Allow dropdown to show */
+  margin: 0 0 8px 0;
+  transition: 0.3s ease-in-out;
+}
+
+.phone-input-group:focus-within {
+  background: rgba(240, 238, 233, 0.95);
+  border-color: rgba(240, 238, 233, 0.8);
+}
+
+.phone-prefix-input {
+  display: none;
+  /* Removed in favor of custom wrapper */
+}
+
 .contact form input:focus,
-.contact form textarea:focus {
+.contact form textarea:focus,
+.contact form select:focus,
+.phone-prefix-input:focus {
   background: rgba(240, 238, 233, 0.95);
   color: #616594;
+  outline: none;
+}
+
+/* Custom Prefix Dropdown */
+.custom-prefix-wrapper {
+  position: relative;
+  width: 90px;
+  /* Fixed width for prefix */
+}
+
+.phone-prefix-display {
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(240, 238, 233, 0.3);
+  color: #f0eee9;
+  padding: 14px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: 0.3s ease-in-out;
+  height: 100%;
+}
+
+.phone-input-group:focus-within .phone-prefix-display {
+  color: #616594;
+  border-right-color: rgba(97, 101, 148, 0.3);
+}
+
+.phone-input-group input[type="tel"] {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 20px 20px 0 !important;
+  margin: 0 !important;
+  flex: 1;
+}
+
+.phone-input-group:focus-within input[type="tel"] {
+  color: #616594 !important;
+}
+
+.selected-flag {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.prefix-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 300px;
+  background: rgba(25, 25, 25, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  z-index: 1000;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.prefix-search {
+  width: calc(100% - 24px);
+  margin: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.prefix-search:focus {
+  outline: none;
+  border-color: #f07b19;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.prefix-list {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0 4px 8px 4px;
+}
+
+.prefix-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.prefix-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.prefix-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.prefix-option {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  margin: 0 4px;
+}
+
+.prefix-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: translateX(4px);
+}
+
+.dropdown-flag {
+  width: 28px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.country-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dial-code {
+  font-weight: 700;
+  color: #f07b19;
+  font-size: 13px;
+  min-width: 45px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.dropdown-flag,
+.selected-flag {
+  width: 24px !important;
+  height: 16px !important;
+  min-width: 24px !important;
+  min-height: 16px !important;
+  object-fit: cover !important;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.field-error-message {
+  background: rgba(220, 53, 69, 0.9);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 8px 15px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 5px;
+  animation: fadeIn 0.3s ease-in-out;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.error-input {
+  border-color: #ff4d4d !important;
 }
 
 .contact form input::placeholder,
@@ -1603,8 +1817,19 @@ p.danger {
     flex-direction: row;
     align-items: center;
   }
+}
 
+/* Tablet refinement: Hide PSA titles */
+@media (min-width: 768px) and (max-width: 991px) {
 
+  .psa-title,
+  .project-psa-title {
+    display: none !important;
+  }
+
+  .psa-item {
+    margin-bottom: 20px;
+  }
 }
 
 /* What I Learned Section */
@@ -1884,6 +2109,15 @@ p.danger {
 
 /* Mobile */
 @media (max-width: 768px) {
+  .banner h1 {
+    font-size: 45px !important;
+    min-height: 120px;
+    /* Adjust to stay fixed as text changes */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .now-card {
     padding: 25px 20px;
     animation: none;

@@ -177,12 +177,6 @@ export const CVNavBar = () => {
         </button>
 
         <div className={`dropdown-menu ${menuOpen ? "show" : ""}`}>
-           <div className="language-switch-mobile" style={{textAlign: 'center', marginBottom: '15px'}}>
-               <button onClick={toggleLanguage} className="vvd" style={{padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', margin: '0 auto'}}>
-                  <span>{language === 'en' ? 'Switch to Italian' : 'Switch to English'}</span>
-                  {language === 'en' ? <ItFlag size={20} /> : <UkFlagSimple size={20} />}
-               </button>
-          </div>
           <div className="social-icons-dropdown">
             <a
               href="https://www.linkedin.com/in/maramaouini/"

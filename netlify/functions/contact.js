@@ -10,10 +10,10 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { firstName, lastName, email, phone, message } = JSON.parse(event.body);
+    const { firstName, lastName, email, phonePrefix, phone, message } = JSON.parse(event.body);
 
     // Validation
-    if (!firstName || !lastName || !email || !phone || !message) {
+    if (!firstName || !lastName || !email || !phonePrefix || !phone || !message) {
       return {
         statusCode: 400,
         body: JSON.stringify({ code: 400, message: "All fields are required" }),
@@ -49,7 +49,7 @@ exports.handler = async (event) => {
       html: `
         <p><strong>Name:</strong> ${fullName}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Phone:</strong> ${phonePrefix} ${phone}</p>
         <p><strong>Message:</strong> ${message}</p>
       `,
       replyTo: email,

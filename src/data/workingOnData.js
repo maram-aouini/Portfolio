@@ -10,7 +10,7 @@ export const workingOnData = [
     icon: Globe2,
     translationKey: "lang-btn",
     priority: true,
-    progress: 90,
+    progress: 99,
     stageKey: "building",
     technologies: ["React", "Context API"],
     imgUrl: projImg1,

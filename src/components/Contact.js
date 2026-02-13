@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 import { useLanguage } from "../context/LanguageContext";
+import { countryCodes } from "../data/countryCodes";
 
 export const Contact = () => {
   const { t } = useLanguage();
@@ -11,13 +12,18 @@ export const Contact = () => {
     firstName: '',
     lastName: '',
     email: '',
+    phonePrefix: '+39',
     phone: '',
     message: ''
   };
 
+  const [status, setStatus] = useState({});
+  const [emailError, setEmailError] = useState("");
+  const [showPrefixDropdown, setShowPrefixDropdown] = useState(false);
+  const [prefixSearch, setPrefixSearch] = useState("");
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState(t('contact.button.send'));
-  const [status, setStatus] = useState({});
+  const dropdownRef = useRef(null);
 
   // Reset button text when language changes, unless currently sending
   useEffect(() => {
@@ -27,9 +33,18 @@ export const Contact = () => {
   }, [t, buttonText]);
 
   const onFormUpdate = (category, value) => {
+    let updatedValue = value;
+    
+    // Auto-+ logic for phonePrefix
+    if (category === 'phonePrefix') {
+      if (!value.startsWith('+') && value.length > 0) {
+        updatedValue = '+' + value;
+      }
+    }
+
     setFormDetails({
       ...formDetails,
-      [category]: value
+      [category]: updatedValue
     });
   };
 
@@ -39,6 +54,7 @@ export const Contact = () => {
       !formDetails.firstName.trim() ||
       !formDetails.lastName.trim() ||
       !formDetails.email.trim() ||
+      !formDetails.phonePrefix.trim() ||
       !formDetails.phone.trim() ||
       !formDetails.message.trim()
     ) {
@@ -51,7 +67,13 @@ export const Contact = () => {
   e.preventDefault();
 
   // If fields are not compiled, send an error message
-  if (!validateForm()) {
+  if (!validateForm() || emailError) {
+    if (!emailError && !formDetails.email.trim()) {
+       // Allow validateForm to handle empty state
+    } else if (emailError) {
+       setStatus({ success: false, message: emailError });
+       return;
+    }
     setStatus({ success: false, message: t('contact.messages.incomplete') });
     return;
   }
@@ -82,6 +104,35 @@ export const Contact = () => {
   }
 };
 
+  const handleEmailInput = (e) => {
+    const value = e.target.value;
+    onFormUpdate('email', value);
+    
+    // Real-time validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (value && !emailRegex.test(value)) {
+      setEmailError(t('contact.messages.invalidEmail'));
+    } else {
+      setEmailError("");
+    }
+  };
+
+  // Click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowPrefixDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredCountries = countryCodes.filter(c => 
+    c.name.toLowerCase().includes(prefixSearch.toLowerCase()) || 
+    c.dial_code.includes(prefixSearch)
+  );
+
   return (
     <section className="contact" id="contact">
 
@@ -89,22 +140,25 @@ export const Contact = () => {
         <div className="section-box">
           <Row className="align-items-center">
             <Col size={12} md={6}>
-              <TrackVisibility once>
-                {({ isVisible }) =>
-                  <img
-                    className={isVisible ? "animate__animated animate__zoomIn" : ""}
-                    src={contactImg}
-                    alt="Contact Us"
-                  />
-                }
+              <TrackVisibility once offset={100}>
+                {({ isVisible }) => {
+                  return (
+                    <img
+                      className={isVisible ? "animate__animated animate__zoomIn" : "hide-on-load"}
+                      src={contactImg}
+                      alt="Contact Us"
+                    />
+                  );
+                }}
               </TrackVisibility>
             </Col>
 
             <Col size={12} md={6}>
-              <TrackVisibility once>
-                {({ isVisible }) =>
-                  <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                    <h2>{t('contact.title')}</h2>
+              <TrackVisibility once offset={100}>
+                {({ isVisible }) => {
+                  return (
+                    <div className={isVisible ? "animate__animated animate__zoomIn" : "hide-on-load"}>
+                      <h2>{t('contact.title')}</h2>
 
                     <form onSubmit={handleSubmit} netlify>
                       <Row>
@@ -130,19 +184,84 @@ export const Contact = () => {
                         <Col size={12} sm={6} className="px-1">
                           <input
                             type="email"
+                            className={emailError ? "error-input" : ""}
                             value={formDetails.email}
                             placeholder={t('contact.placeholders.email')}
-                            onChange={(e) => onFormUpdate('email', e.target.value)}
+                            onBlur={(e) => {
+                              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                              if (e.target.value && !emailRegex.test(e.target.value)) {
+                                setEmailError(t('contact.messages.invalidEmail'));
+                              }
+                            }}
+                            onChange={handleEmailInput}
+                            required
                           />
+                          {emailError && <span className="field-error-message">{emailError}</span>}
                         </Col>
 
                         <Col size={12} sm={6} className="px-1">
-                          <input
-                            type="tel"
-                            value={formDetails.phone}
-                            placeholder={t('contact.placeholders.phone')}
-                            onChange={(e) => onFormUpdate('phone', e.target.value)}
-                          />
+                          <div className="phone-input-group">
+                            <div className="custom-prefix-wrapper" ref={dropdownRef}>
+                              <div 
+                                className="phone-prefix-display" 
+                                onClick={() => setShowPrefixDropdown(!showPrefixDropdown)}
+                              >
+                                {formDetails.phonePrefix ? (
+                                  <>
+                                    <img 
+                                      src={`https://flagcdn.com/w20/${countryCodes.find(c => c.dial_code === formDetails.phonePrefix)?.code.toLowerCase()}.png`} 
+                                      alt=""
+                                      className="selected-flag"
+                                    />
+                                    {formDetails.phonePrefix}
+                                  </>
+                                ) : (
+                                  t('contact.placeholders.phonePrefix')
+                                )}
+                              </div>
+
+                              {showPrefixDropdown && (
+                                <div className="prefix-dropdown">
+                                  <input 
+                                    type="text" 
+                                    className="prefix-search"
+                                    placeholder="Search..."
+                                    autoFocus
+                                    value={prefixSearch}
+                                    onChange={(e) => setPrefixSearch(e.target.value)}
+                                  />
+                                  <div className="prefix-list">
+                                    {filteredCountries.map((c, index) => (
+                                      <div 
+                                        key={index} 
+                                        className="prefix-option"
+                                        onClick={() => {
+                                          onFormUpdate('phonePrefix', c.dial_code);
+                                          setShowPrefixDropdown(false);
+                                          setPrefixSearch("");
+                                        }}
+                                      >
+                                        <img 
+                                          src={`https://flagcdn.com/w20/${c.code.toLowerCase()}.png`} 
+                                          alt="" 
+                                          className="dropdown-flag"
+                                        />
+                                        <span className="country-name">{c.name}</span>
+                                        <span className="dial-code">{c.dial_code}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                            
+                            <input
+                              type="tel"
+                              value={formDetails.phone}
+                              placeholder={t('contact.placeholders.phone')}
+                              onChange={(e) => onFormUpdate('phone', e.target.value)}
+                            />
+                          </div>
                         </Col>
 
                         <Col size={12} className="px-1">
@@ -169,8 +288,9 @@ export const Contact = () => {
 
                       </Row>
                     </form>
-                  </div>
-                }
+                    </div>
+                  );
+                }}
               </TrackVisibility>
             </Col>
           </Row>

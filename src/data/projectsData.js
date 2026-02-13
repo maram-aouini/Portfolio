@@ -50,7 +50,7 @@ export const projectsData = [
   {
   id: 2,
   title: "404 Cat-Astrophe Interactive Page",
-  category: "frontend",
+  category: "react",
   status: "live",
   shortDescription: "An interactive, animated 404 page with draggable cats and surprise Easter eggs.",
   fullDescription: [

@@ -16,7 +16,7 @@ const CircularMeter = ({ percentage, color = "#AA367C", isVisible }) => {
 
   useEffect(() => {
     if (isVisible) {
-      const duration = 1500;
+      const duration = 1800;
       const steps = 60;
       const stepValue = percentage / steps;
       const stepDuration = duration / steps;
@@ -96,7 +96,7 @@ const SmallCircularMeter = ({ percentage, color = "#AA367C", isVisible }) => {
 
   useEffect(() => {
     if (isVisible) {
-      const duration = 1200;
+      const duration = 1600;
       const steps = 40;
       const stepValue = percentage / steps;
       const stepDuration = duration / steps;

@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Modal, Carousel } from "react-bootstrap";
 import { projectsData } from "../data/projectsData";
 import { ArrowLeft, ArrowRight, ExternalLink, Check, Github } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import { NotFound } from "./NotFound";
 
 export const ProjectDetail = () => {
   const { id } = useParams();
@@ -39,12 +40,7 @@ export const ProjectDetail = () => {
   }, [id, project, title]);
 
   if (!project) {
-    return (
-      <Container className="project-detail py-5">
-        <h2>Project not found</h2>
-        <Button onClick={() => navigate(-1)}>Go Back</Button>
-      </Container>
-    );
+    return <NotFound />;
   }
 
   return (
@@ -139,6 +135,19 @@ export const ProjectDetail = () => {
                           {t('projects.headers.viewSource')}
                         </a>
                       )}
+
+                      {(project.status === "wip" || project.status === "placeholder") && (
+                        <div className="mt-4">
+                          <Button
+                            variant="outline-light"
+                            onClick={() => navigate("/")}
+                            className="project-link-btn secondary"
+                          >
+                            <ArrowLeft size={20} className="me-2" />
+                            {t('projects.headers.back')}
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -152,7 +161,7 @@ export const ProjectDetail = () => {
                   </h2>
 
                   {/* Mobile vertical title */}
-                  <h2 className="project-psa-title-vertical d-none d-md-none text-center mb-4">
+                  <h2 className="project-psa-title-vertical d-block d-md-none text-center mb-4">
                     <span>{t('projects.headers.problem')}</span>
                     <span className="title-arrow">↓</span>
                     <span>{t('projects.headers.solution')}</span>
@@ -194,7 +203,7 @@ export const ProjectDetail = () => {
                   </ul>
                 </div>
               )}
-              <Row className="mb-4">
+              <Row className="mt-5 mb-4">
                 <Col>
                   <Button
                     variant="outline-light"
