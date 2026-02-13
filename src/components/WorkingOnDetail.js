@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { ArrowLeft, CheckCircle2, Circle, GitBranch, GitCommit, Clock, Terminal, Globe2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { workingOnData } from '../data/workingOnData';
