@@ -9,6 +9,8 @@ import adeccoLogo from '../assets/img/companies/adecco-logo.png';
 import enelLogo from '../assets/img/companies/enel-logo.png';
 import humangestLogo from '../assets/img/companies/humangest-logo.png';
 
+
+
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 
@@ -78,7 +80,7 @@ export const CVPage = () => {
               <div className="cv-profile-card">
                 <div className="cv-avatar-circle">
                   <img
-                    src={require("../assets/img/profile.jpg")}
+                    src={require("../assets/img/profile.PNG")}
                     alt="Your Name"
                     className="cv-avatar-inner"
                   />
