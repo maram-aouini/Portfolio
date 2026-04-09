@@ -80,7 +80,7 @@ export const CVPage = () => {
               <div className="cv-profile-card">
                 <div className="cv-avatar-circle">
                   <img
-                    src={require("../assets/img/profile.PNG")}
+                    src={require("../assets/img/profile.png")}
                     alt="Your Name"
                     className="cv-avatar-inner"
                   />
