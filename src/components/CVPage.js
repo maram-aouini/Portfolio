@@ -139,7 +139,6 @@ export const CVPage = () => {
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.dob')}</span><span className="cv-value">{t('cv.personalInfo.values.dob')}</span></div>
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.address')}</span><span className="cv-value">Pescara, Italy</span></div>
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.email')}</span><span className="cv-value">maramaouini.l@gmail.com</span></div>
-                    <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.phone')}</span><span className="cv-value">+39 334 112 1820</span></div>
                     <div className="cv-info-row"><span className="cv-label">{t('cv.personalInfo.labels.freelance')}</span><span className="cv-value">{t('cv.personalInfo.values.freelance')}</span></div>
                   </div>
                 </div>
@@ -180,9 +179,9 @@ export const CVPage = () => {
                   <div key={i} className="cv-item">
                     <div className="cv-item-header">
                       <h3 className="cv-item-title">{cert.title}</h3>
-                      <span className="cv-date">2025</span>
+                      <span className="cv-date">{cert.date || "2025"}</span>
                     </div>
-                    <div className="cv-company">Talentform</div>
+                    <div className="cv-company">{cert.company || "Talentform"}</div>
                     <p>{cert.desc}</p>
                   </div>
                 ))}

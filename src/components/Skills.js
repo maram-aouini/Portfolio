@@ -191,12 +191,12 @@ export const Skills = () => {
   // Main Carousel Items
   const carouselLabels = t('skills.carousel') || [];
   const carouselSkills = [
-    { name: carouselLabels[0], percentage: 70, color: "#f07b19" },
-    { name: carouselLabels[1], percentage: 80, color: "#2286aa" },
-    { name: carouselLabels[2], percentage: 60, color: "#f07b19" },
-    { name: carouselLabels[3], percentage: 40, color: "#2286aa" },
-    { name: carouselLabels[4], percentage: 60, color: "#f07b19" },
-    { name: carouselLabels[5], percentage: 60, color: "#2286aa" },
+    { name: carouselLabels[0], percentage: 80, color: "#f07b19" }, // Back-end
+    { name: carouselLabels[1], percentage: 85, color: "#2286aa" }, // Front-end
+    { name: carouselLabels[2], percentage: 80, color: "#f07b19" }, // Performance & Responsiveness
+    { name: carouselLabels[3], percentage: 80, color: "#2286aa" }, // UI implementation
+    { name: carouselLabels[4], percentage: 75, color: "#f07b19" }, // Full-stack
+    { name: carouselLabels[5], percentage: 70, color: "#2286aa" }, // CMS
   ];
 
   // Categories
@@ -204,42 +204,60 @@ export const Skills = () => {
   const databasesData = t('skills.categories.databases') || { title: "Databases", items: [] };
   const webFundamentalsData = t('skills.categories.webFundamentals') || { title: "Web Fundamentals", items: [] };
   const backEndData = t('skills.categories.backEnd') || { title: "Back-end", items: [] };
+  const javaSpringBootData = t('skills.categories.javaSpringBoot') || { title: "Java & Spring Boot", items: [] };
+  const angularFrontendData = t('skills.categories.angularFrontend') || { title: "Angular & Frontend", items: [] };
 
   const skillCategories = [
     {
       title: toolsData.title,
       skills: [
         { name: toolsData.items[0], percentage: 90, color: "#724746" },
-        { name: toolsData.items[1], percentage: 80, color: "#724746" },
-        { name: toolsData.items[2], percentage: 85, color: "#724746" },
+        { name: toolsData.items[1], percentage: 85, color: "#724746" },
+        { name: toolsData.items[2], percentage: 55, color: "#724746" },
         { name: toolsData.items[3], percentage: 95, color: "#724746" },
       ],
     },
     {
       title: databasesData.title,
       skills: [
-        { name: databasesData.items[0], percentage: 90, color: "#2286aa" },
-        { name: databasesData.items[1], percentage: 70, color: "#2286aa" },
-        { name: databasesData.items[2], percentage: 60, color: "#2286aa" },
-        { name: databasesData.items[3], percentage: 50, color: "#2286aa" },
+        { name: databasesData.items[0], percentage: 85, color: "#2286aa" },
+        { name: databasesData.items[1], percentage: 55, color: "#2286aa" },
+        { name: databasesData.items[2], percentage: 75, color: "#2286aa" },
+        { name: databasesData.items[3], percentage: 70, color: "#2286aa" },
       ],
     },
     {
       title: webFundamentalsData.title,
       skills: [
         { name: webFundamentalsData.items[0], percentage: 85, color: "#616594" },
-        { name: webFundamentalsData.items[1], percentage: 70, color: "#616594" },
+        { name: webFundamentalsData.items[1], percentage: 75, color: "#616594" },
         { name: webFundamentalsData.items[2], percentage: 70, color: "#616594" },
       ],
     },
     {
       title: backEndData.title,
       skills: [
-        { name: backEndData.items[0], percentage: 90, color: "#f07b19" },
+        { name: backEndData.items[0], percentage: 85, color: "#f07b19" },
         { name: backEndData.items[1], percentage: 80, color: "#f07b19" },
         { name: backEndData.items[2], percentage: 75, color: "#f07b19" },
-        { name: backEndData.items[3], percentage: 60, color: "#f07b19" },
-        { name: backEndData.items[4], percentage: 60, color: "#f07b19" },
+        { name: backEndData.items[3], percentage: 75, color: "#f07b19" },
+      ],
+    },
+    {
+      title: javaSpringBootData.title,
+      skills: [
+        { name: javaSpringBootData.items[0], percentage: 55, color: "#724746" },
+        { name: javaSpringBootData.items[1], percentage: 50, color: "#724746" },
+        { name: javaSpringBootData.items[2], percentage: 45, color: "#724746" },
+        { name: javaSpringBootData.items[3], percentage: 50, color: "#724746" },
+      ],
+    },
+    {
+      title: angularFrontendData.title,
+      skills: [
+        { name: angularFrontendData.items[0], percentage: 55, color: "#2286aa" },
+        { name: angularFrontendData.items[1], percentage: 60, color: "#2286aa" },
+        { name: angularFrontendData.items[2], percentage: 50, color: "#2286aa" },
       ],
     },
   ];
@@ -265,11 +283,19 @@ export const Skills = () => {
           <Col>
             <div className="skill-bx">
               <h2>{t('skills.title')}</h2>
-              <p>{t('skills.p1')}</p>
-              <p>{t('skills.p2')}</p>
-              <p>{t('skills.p3')}</p>
-              <p>{t('skills.p4')}</p>
-              <p>{t('skills.p5')}</p>
+              
+              <div className="skills-intro mb-5">
+                <p className="skills-lead-text">{t('skills.intro')}</p>
+                <Row className="g-3 justify-content-center mt-3">
+                  {t('skills.highlights') && t('skills.highlights').map((highlight, idx) => (
+                    <Col lg={4} md={6} xs={12} key={idx} className="highlight-item-wrapper">
+                      <div className="highlight-badge">
+                        <span className="highlight-bullet">✦</span> {highlight}
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
 
               {/* MAIN CAROUSEL */}
               <Carousel
@@ -289,18 +315,18 @@ export const Skills = () => {
                 ))}
               </Carousel>
 
-              {/* 2x2 GRID OF CATEGORY BLOCKS */}
+              {/* 3x2 GRID OF CATEGORY BLOCKS */}
               <div className="skill-categories mt-5">
                 <Row>
                   {skillCategories.map((category, index) => (
-                    <Col md={6} xs={12} key={index} className="mb-4">
+                    <Col lg={4} md={6} xs={12} key={index} className="mb-4">
                       <div className="skill-category-block">
                         <h4 className="text-center mb-3">
                           {category.title}
                         </h4>
-        <Row className="g-2 justify-content-center px-1 px-md-5">
-            {category.skills.map((skill, i) => (
-            <Col xs={6} key={i} className="mb-3">
+                        <Row className="g-2 justify-content-center px-1">
+                          {category.skills.map((skill, i) => (
+                            <Col xs={6} key={i} className="mb-3">
                               <div className="skill-item text-center">
                                 <SmallCircularMeter
                                   percentage={skill.percentage}
@@ -309,7 +335,7 @@ export const Skills = () => {
                                 />
                                 <h6
                                   className="mt-1 mb-0"
-                                  style={{ fontSize: "0.8rem" }}
+                                  style={{ fontSize: "0.75rem", lineHeight: "1.3" }}
                                 >
                                   {skill.name}
                                 </h6>

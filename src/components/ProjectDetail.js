@@ -21,6 +21,7 @@ export const ProjectDetail = () => {
   const fullDescription = transProject?.fullDescription || project?.fullDescription;
   const psa = transProject?.psa || project?.psa;
   const learned = transProject?.learned || project?.learned;
+  const liveNote = transProject?.liveNote || project?.liveNote;
   const statusLabel = project?.status === "live" ? t('projects.status.live') : 
                       project?.status === "wip" ? t('projects.status.wip') :
                       project?.status === "completed" ? t('projects.status.completed') :
@@ -149,6 +150,18 @@ export const ProjectDetail = () => {
                         </div>
                       )}
                     </div>
+                    {liveNote && (
+                      <div className="mt-3 p-3 rounded" style={{
+                        background: 'rgba(242, 123, 25, 0.1)',
+                        borderLeft: '4px solid #f07b19',
+                        fontSize: '0.85rem',
+                        color: '#2286aa',
+                        fontWeight: '500',
+                        lineHeight: '1.4'
+                      }}>
+                        <strong style={{ color: '#f07b19' }}>{t('projects.headers.note') || 'Note'}:</strong> {liveNote}
+                      </div>
+                    )}
                   </div>
                 </Col>
               </Row>

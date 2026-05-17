@@ -54,10 +54,13 @@ export const Projects = () => {
                     <Nav.Link eventKey="first">{t('projects.tabs.all')}</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="second">{t('projects.tabs.react')}</Nav.Link>
+                    <Nav.Link eventKey="second">{t('projects.tabs.frontEnd')}</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="third">{t('projects.tabs.laravel')}</Nav.Link>
+                    <Nav.Link eventKey="third">{t('projects.tabs.backEnd')}</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="fourth">{t('projects.tabs.fullStack')}</Nav.Link>
                   </Nav.Item>
                 </Nav>
                 <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : "hide-on-load"}>
@@ -78,7 +81,7 @@ export const Projects = () => {
                   <Tab.Pane eventKey="second">
                     <Row>
                       {
-                        filterProjects("react").map((project, index) => {
+                        filterProjects("front-end").map((project, index) => {
                           return (
                             <ProjectCard
                               key={index}
@@ -92,7 +95,21 @@ export const Projects = () => {
                   <Tab.Pane eventKey="third">
                     <Row>
                       {
-                        filterProjects("laravel").map((project, index) => {
+                        filterProjects("back-end").map((project, index) => {
+                          return (
+                            <ProjectCard
+                              key={index}
+                              {...project}
+                            />
+                          )
+                        })
+                      }
+                    </Row>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="fourth">
+                    <Row>
+                      {
+                        filterProjects("full-stack").map((project, index) => {
                           return (
                             <ProjectCard
                               key={index}

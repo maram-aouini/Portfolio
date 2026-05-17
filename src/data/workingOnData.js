@@ -1,34 +1,36 @@
-import { Package, BookOpen, Calendar, Globe2 } from "lucide-react";
+import { Briefcase, BookOpen, Layers, Globe2 } from "lucide-react";
 // Import placeholder images
 import projImg1 from "../assets/img/projects/project1-img1.png";
 import wipImg2 from "../assets/img/projects/wip-img1.png";
 import projImg3 from "../assets/img/projects/project-img3.png";
+import kivraHp from "../assets/img/projects/Kivra-HP.png";
+import jobTrackerPlaceholder from "../assets/img/projects/project-placeholder1.png";
+import flashcardsPlaceholder from "../assets/img/projects/flashcard_app_placeholder.svg";
 
 export const workingOnData = [
   {
     id: "lang-btn",
     icon: Globe2,
     translationKey: "lang-btn",
-    priority: true,
-    progress: 99,
-    stageKey: "building",
+    progress: 100,
+    stageKey: "completed",
     technologies: ["React", "Context API"],
     imgUrl: projImg1,
     buildContext: {
       branch: "main",
       commit: "#72ab4f2",
-      updated: "2h ago",
+      updated: "Just now",
       env: "Production"
     }
   },
   {
-    id: "grocery",
-    icon: Package,
-    translationKey: "grocery",
+    id: "job-tracker",
+    icon: Briefcase,
+    translationKey: "jobTracker",
     progress: 45,
     stageKey: "backend",
     technologies: ["React", "Node.js", "MongoDB"],
-    imgUrl: wipImg2,
+    imgUrl: jobTrackerPlaceholder,
     buildContext: {
       branch: "develop",
       commit: "#bc3921a",
@@ -37,28 +39,30 @@ export const workingOnData = [
     }
   },
   {
-    id: "library",
+    id: "kivra",
     icon: BookOpen,
-    translationKey: "library",
-    progress: 15,
-    stageKey: "frontend",
-    technologies: ["React", "API Integration"],
-    imgUrl: projImg3,
+    translationKey: "kivra",
+    priority: true,
+    progress: 80,
+    stageKey: "fullstack",
+    technologies: ["Angular", "Spring Boot", "Java", "REST API", "MySQL"],
+    imgUrl: kivraHp,
     buildContext: {
-      branch: "feature/api",
-      commit: "#df982cc",
-      updated: "1d ago",
-      env: "Development"
+      branch: "feature/bugfixes",
+      commit: "#a12f8d3",
+      updated: "10m ago",
+      env: "Development",
+      repoUrl: "https://github.com/maram-aouini/kivra"
     }
   },
   {
-    id: "calendar",
-    icon: Calendar,
-    translationKey: "calendar",
-    progress: 10,
+    id: "flashcards",
+    icon: Layers,
+    translationKey: "flashcards",
+    progress: 15,
     stageKey: "planning",
-    technologies: ["Planning", "Design"],
-    imgUrl: projImg1,
+    technologies: ["React", "TypeScript", "Algorithms"],
+    imgUrl: flashcardsPlaceholder,
     buildContext: {
       branch: "design/v1",
       commit: "#ee4411b",

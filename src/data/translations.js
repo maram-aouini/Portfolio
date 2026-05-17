@@ -18,26 +18,32 @@ export const translations = {
       message: "This portfolio is currently being updated. Some features may be incomplete, but feel free to explore!"
     },
     skills: {
-      title: "Skills",
-      p1: "Full Stack Web Development with experience building structured, database-driven web applications.",
-      p2: "Strong knowledge of HTML, CSS, JavaScript, and React for creating responsive, accessible user interfaces.",
-      p3: "Back-end development using PHP and Laravel, including authentication, CRUD operations, and database integration with MySQL.",
-      p4: "Experience with version control using Git and GitHub, and collaborative development workflows.",
-      p5: "Familiar with debugging, testing, and iterative development in real-world projects.",
+      title: "Skills & Expertise",
+      intro: "Full Stack developer with experience in both Java/Spring Boot backends and Angular frontends, as well as PHP/Laravel. Comfortable with relational databases, REST APIs, authentication, and version control.",
+      highlights: [
+        "Java & Spring Boot Back-end",
+        "Angular & TypeScript Front-end",
+        "PHP & Laravel Web Applications",
+        "Relational Databases & JDBC / JPA",
+        "Secure REST APIs & JWT Auth",
+        "Git & Collaborative DevOps"
+      ],
       carousel: [
-        "Back-end", "Front-end", "Performance & Responsiveness", "UI implementation", "Full-stack", "CMS"
+        "Back-end Development", "Front-end Development", "Performance & Responsiveness", "UI & Visual Design", "Full-stack Integration", "CMS Platforms"
       ],
       categories: {
-        tools: { title: "Tools", items: ["npm", "Environment configs", "Git/GitHub", "Debugging"] },
-        databases: { title: "Databases", items: ["MySQL/SQL", "Database Design Basics", "CRUD Operations", "Relations & Constraints"] },
-        webFundamentals: { title: "Web Fundamentals", items: ["Responsive Layouts", "Accessibility Basics", "Basic Security"] },
-        backEnd: { title: "Back-end", items: ["PHP", "Laravel", "REST APIs", "Authentication & Authorization", "Session Management"] }
+        tools: { title: "Tools & DevOps", items: ["npm / Build Tools", "Git & GitHub Workflow", "Maven Dependencies", "Debugging & DevTools"] },
+        databases: { title: "Databases & ORMs", items: ["MySQL & JDBC", "JPA & Hibernate ORM", "Relational DB Design", "ACID / Transactions"] },
+        webFundamentals: { title: "Web Fundamentals", items: ["Responsive layouts", "Accessibility Basics", "Basic Security & CORS"] },
+        backEnd: { title: "PHP & Laravel", items: ["PHP & Laravel Framework", "RESTful API Architecture", "Authentication / JWT", "Session Management"] },
+        javaSpringBoot: { title: "Java & Spring Boot", items: ["Java OOP Principles", "Spring Boot Architecture", "Spring Security / JWT", "JPA Entity Mapping"] },
+        angularFrontend: { title: "Angular & TypeScript", items: ["Components & Routing", "TypeScript Programming", "HttpClient REST Requests"] }
       }
     },
     projects: {
       title: "Projects & Case Studies",
       description: "Selected projects and upcoming case studies. Some entries are currently in progress and will be expanded with full technical breakdowns.",
-      tabs: { all: "All", react: "React", laravel: "Laravel" },
+      tabs: { all: "All", frontEnd: "Front-End", backEnd: "Back-End", fullStack: "Full-Stack" },
       status: {
         completed: "Completed",
         wip: "Work in Progress",
@@ -53,7 +59,8 @@ export const translations = {
         back: "Back to Projects",
         viewLive: "View Live",
         viewSource: "View Source",
-        clickEnlarge: "Click to enlarge"
+        clickEnlarge: "Click to enlarge",
+        note: "Important Note"
       }
     },
     contact: {
@@ -77,18 +84,20 @@ export const translations = {
     current: {
       title: "Currently Working On",
       subtitle: "Coding in Public | Updated Monthly",
-      lastUpdate: "Last update: Jan 2026",
+      lastUpdate: "Last update: May 2026",
       stages: {
         building: "Building",
         backend: "Backend Development",
         frontend: "Frontend Development",
-        planning: "Planning"
+        fullstack: "Full Stack Development",
+        planning: "Planning",
+        completed: "Completed"
       },
       items: {
-        "lang-btn": { title: "Language changer Button", desc: "Button to change the language of the portfolio website" },
-        grocery: { title: "Grocery/Kitchen Inventory Tracker", desc: "Real-time pantry management with expiration alerts and auto shopping lists" },
-        library: { title: "Book/Manga Library Tracker", desc: "Personal collection manager with reading progress, ratings, and lending logs" },
-        calendar: { title: "Content Creation Calendar", desc: "Blog/social media scheduler with performance analytics and idea board" }
+        "lang-btn": { title: "Language Changer Button", desc: "Button to change the language of the portfolio website" },
+        jobTracker: { title: "Simple Job Application Tracker", desc: "Log jobs you've applied to, status, notes, interviews. Genuinely useful for you right now and relatable to recruiters" },
+        kivra: { title: "Kivra – Universal Media Tracker", desc: "All-in-one tracker for movies, TV shows, anime, manga and books, built with Java Spring Boot and Angular" },
+        flashcards: { title: "Language Learning Flashcard App", desc: "Spaced repetition algorithm (shows cards you struggle with more often). Algorithmically interesting and useful" }
       }
     },
     cv: {
@@ -98,8 +107,8 @@ export const translations = {
       about: {
         title: "ABOUT ME",
         greeting: "Hello, I'm Maram Aouini!",
-        p1: "I am a Full Stack Web Developer focused on building reliable, user-friendly web applications using React, PHP, Laravel, and MySQL. I hold certifications in Full Stack and Back End Development from Talentform and have hands-on experience working with real-world projects.",
-        p2: "Coming from a background in technical assistance and customer service, I combine strong problem-solving skills with clear communication and a user-centric mindset. I enjoy turning complex requirements into clean, maintainable solutions that actually work."
+        p1: "I am a Full Stack Web Developer focused on building reliable, user-friendly web applications. My expertise spans both modern frontend frameworks like React and Angular, and robust backend ecosystems including Java / Spring Boot and PHP / Laravel. I hold certifications in Full Stack and Back End Development from Talentform, as well as a Junior Java Developer certification from Generation Italy, and have hands-on experience working on real-world projects.",
+        p2: "Coming from a background in technical assistance and customer service, I combine strong problem-solving skills with clear communication and a user-centric mindset. I enjoy managing complete, type-safe full-stack integrations, building secure RESTful APIs, and turning complex requirements into clean, maintainable solutions that actually work."
       },
       personalInfo: {
         title: "personal information",
@@ -129,8 +138,9 @@ export const translations = {
       certifications: {
         title: "CERTIFICATIONS",
         items: [
-          { title: "Full Stack Web Developer", desc: "Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL." },
-          { title: "Back End Developer", desc: "Focused curriculum on server-side programming, database management, API development, and security best practices." }
+          { title: "Junior Java Developer", company: "Generation Italy", date: "2026", desc: "Intensive training program focused on Java OOP principles, database connectivity (JDBC/MySQL), enterprise backend design, and MVC architecture." },
+          { title: "Full Stack Web Developer", company: "Talentform", date: "2025", desc: "Comprehensive training in modern web technologies including HTML5, CSS3, JavaScript ES6+, React, PHP, and MySQL." },
+          { title: "Back End Developer", company: "Talentform", date: "2025", desc: "Focused curriculum on server-side programming, database management, API development, and security best practices." }
         ]
       },
       strengths: {
@@ -145,10 +155,10 @@ export const translations = {
       focus: {
         title: "CURRENT TECHNICAL FOCUS",
         items: [
-          "Improving Laravel authentication and database relationships",
-          "Strengthening React component architecture",
-          "Practicing clean, maintainable code patterns",
-          "Exploring performance optimization and best practices"
+          "Building robust Spring Boot RESTful backends and Angular frontends",
+          "Improving relational database optimization and JPA entity mapping",
+          "Strengthening React component architecture and state management",
+          "Practicing clean, maintainable, and type-safe code patterns"
         ]
       },
       experience: {
@@ -205,10 +215,10 @@ export const translations = {
         shortDescription: "An interactive, animated 404 page with draggable cats and surprise Easter eggs.",
         fullDescription: [
           "This project is a fully interactive 404 error page built in React. Beyond a simple error message, it includes draggable elements, randomized animations, and a hidden Easter egg mode with a 10% chance of unlocking a secret message for playful user engagement.",
-          "Try visiting the page multiple times—you might just unlock a secret!",
-          "The page handles complex animation sequences, state management for multiple dynamic elements, andensures smooth performance even with overlapping timers and transitions.",
+          "The page handles complex animation sequences, state management for multiple dynamic elements, and ensures smooth performance even with overlapping timers and transitions.",
           "It demonstrates advanced React skills including hooks, useRef management, useLayoutEffect for layout measurement, and precise control over component mounting and animations."
         ],
+        liveNote: "Hint: Try refreshing or reloading the page multiple times in a row! There is a special 10% chance Easter Egg waiting to be triggered!",
         psa: {
           problem: "The goal was to create an engaging, interactive 404 page while maintaining smooth performance and predictable component behavior. Challenges included coordinating multiple animations, preventing layout flickering, and managing dynamic state for multiple draggable elements.",
           solution: "Implemented a controlled animation sequence with useLayoutEffect and useEffect to manage timing, used refs to track draggable cats and forbidden zones, and created fallback logic to ensure stable rendering. Added randomized messages and Easter eggs for enhanced user experience.",
@@ -223,13 +233,26 @@ export const translations = {
         ]
       },
       3: {
-        title: "Full-Stack Web Platform",
-        shortDescription: "(Case Study in Progress)",
+        title: "Kivra – Universal Media Tracker",
+        shortDescription: "An all-in-one tracker for anime, movies, TV shows, manga and books.",
         fullDescription: [
-          "Full details, source code, and live demo will be added soon."
+          "Kivra is a full-stack media tracking application built with Java Spring Boot and Angular. It allows users to manage and track all their media consumption: anime, movies, TV shows, manga and books, in a single unified platform.",
+          "The project covers both frontend and backend development, including a REST API, user authentication, and a responsive Angular interface."
         ],
-        psa: null,
-        learned: []
+        psa: {
+          problem: "Keeping track of media across different platforms and categories: anime, movies, books, manga, with no single tool that handles all of them.",
+          solution: "Built a full-stack application with a Spring Boot REST API backend and an Angular frontend, allowing users to log and track all media types in one place.",
+          outcome: "A functional, deployed media tracker that demonstrates full-stack development skills across both Java backend and Angular frontend."
+        },
+        learned: [
+          "Architecting layered backends with Spring Boot Controller, Service, and Repository patterns.",
+          "Securing REST APIs with Spring Security and JWT-based authentication.",
+          "Building responsive single-page applications (SPA) using Angular components, services, and RxJS.",
+          "Integrating third-party APIs (TMDB/AniList) to enrich media listings with real-time metadata.",
+          "Designing relational database schemas and managing JPA entity mapping and migrations.",
+          "Configured CORS policies and production environments for multi-host deployments."
+        ],
+        liveNote: "Unfortunately, due to the limitations of hosting on a free web service, the backend server spins down when inactive. When you first launch the live website, it can take up to 2 minutes for the server to wake up and start responding. I highly appreciate your patience!"
       },
       4: {
         title: "Grocery Tracking App",
@@ -248,6 +271,15 @@ export const translations = {
         ],
         psa: null,
         learned: []
+      },
+      6: {
+        title: "Full-Stack Web Platform",
+        shortDescription: "(Case Study in Progress)",
+        fullDescription: [
+          "Full details, source code, and live demo will be added soon."
+        ],
+        psa: null,
+        learned: []
       }
     },
     // WORKING ON CONTENT - KEYED BY ID STRING
@@ -257,20 +289,27 @@ export const translations = {
         description: "A feature implementation granting users the ability to toggle the application language between English and Italian. Utilizes React Context API for global state management and dynamic content rendering.",
         roadmap: ["Implement Context", "Create Switcher UI", "Add Support for EN/IT", "Persist Choice"]
       },
-      "grocery": {
-        title: "Grocery/Kitchen Inventory Tracker",
-        description: "A full-stack application designed to help households manage food inventory, reduce waste, and simplify shopping. Features include barcode scanning and expiration notifications.",
-        roadmap: ["Database Schema Design", "API Development", "Frontend Implementation", "Barcode Integration"]
+      "jobTracker": {
+        title: "Simple Job Application Tracker",
+        description: "A practical tool designed to log and monitor job applications, dynamic interview schedules, follow-up alerts, and application outcomes. Genuinely useful for managing job search pipelines and relatable to recruiters.",
+        roadmap: [
+          "UI Design & Wireframing",
+          "Core Job Entry Form",
+          "Job List & Status Tracking",
+          "Search, Filter & Sort",
+          "Notes & Reminders per Job",
+          "Stats & Application Overview"
+        ]
       },
-      "library": {
-        title: "Book/Manga Library Tracker",
-        description: "An organizational tool for book and manga enthusiasts to track their collections and reading habits. Allows users to categorize titles, track reading progress, and rate series.",
-        roadmap: ["UI Design", "Google Books API Integration", "User Auth", "Reading Log Feature"]
+      "kivra": {
+        title: "Kivra – Universal Media Tracker",
+        description: "A comprehensive media tracking application allowing users to catalog and monitor their progress across movies, TV shows, anime, manga, and books. Featuring a robust, layered backend architecture built with Java Spring Boot and a dynamic, responsive client application built with Angular and TypeScript. Includes database integration, secure user authentication, and third-party media API integrations.",
+        roadmap: ["Database Modeling & Schema Setup", "Spring Boot RESTful API Development", "Spring Security & JWT Authentication", "Angular Component Architecture", "Third-party API Integration", "UX/UI Improvements", "Bug Fixes & Refactoring"]
       },
-      "calendar": {
-        title: "Content Creation Calendar",
-        description: "A productivity tool for content creators to plan and schedule posts. Includes a drag-and-drop calendar, idea board for brainstorming, and basic analytics.",
-        roadmap: ["Calendar View Component", "Drag & Drop Logic", "Post Metadata Form", "Analytics Dashboard"]
+      "flashcards": {
+        title: "Language Learning Flashcard App",
+        description: "An algorithmically interesting learning app utilizing spaced repetition intervals to schedule review sessions, ensuring that words you struggle with are reinforced more frequently.",
+        roadmap: ["Spaced Repetition Algorithm", "Interactive Deck Creator", "Spaced Review Session", "Progress & Mastery Charting"]
       }
     },
   },
@@ -293,26 +332,32 @@ export const translations = {
       message: "Questo portfolio è attualmente in aggiornamento. Alcune funzionalità potrebbero essere incomplete, ma sentiti libero di esplorare!"
     },
     skills: {
-      title: "Competenze",
-      p1: "Sviluppo Web Full Stack con esperienza nella costruzione di applicazioni strutturate e basate su database.",
-      p2: "Forte conoscenza di HTML, CSS, JavaScript e React per creare interfacce utente adattabili a tutti i dispositivi e accessibili.",
-      p3: "Sviluppo Back-end usando PHP e Laravel, inclusa autenticazione, operazioni CRUD e integrazione database con MySQL.",
-      p4: "Esperienza con controllo versione usando Git e GitHub, e flussi di lavoro collaborativi.",
-      p5: "Familiarità con debugging, testing e sviluppo iterativo in progetti reali.",
+      title: "Competenze ed Esperienza",
+      intro: "Sviluppatrice Full Stack con esperienza sia sui backend Java/Spring Boot che sui frontend Angular, così come in PHP/Laravel. A mio agio con database relazionali, API REST, autenticazione e controllo di versione.",
+      highlights: [
+        "Backend in Java / Spring Boot",
+        "Frontend in Angular / TypeScript",
+        "Web App in PHP / Laravel",
+        "Database Relazionali e JDBC / JPA",
+        "API REST Sicure e Auth JWT",
+        "Git e DevOps Collaborativo"
+      ],
       carousel: [
-        "Back-end", "Front-end", "Performance & Responsive Design", "Implementazione interfacce UI", "Full-stack", "CMS"
+        "Sviluppo Back-end", "Sviluppo Front-end", "Performance e Responsività", "UI & Design Visivo", "Integrazione Full-stack", "Piattaforme CMS"
       ],
       categories: {
-        tools: { title: "Strumenti", items: ["npm", "Configurazioni ambiente", "Git/GitHub", "Debugging"] },
-        databases: { title: "Database", items: ["MySQL/SQL", "Fondamenti di progettazione database", "Operazioni CRUD", "Relazioni & Vincoli"] },
-        webFundamentals: { title: "Fondamenti Web", items: ["Layout Responsive", "Basi Accessibilità", "Nozioni base di sicurezza"] },
-        backEnd: { title: "Back-end", items: ["PHP", "Laravel", "REST APIs", "Autenticazione & Autorizzazione", "Gestione Sessioni"] }
+        tools: { title: "Strumenti e DevOps", items: ["npm / Strumenti di Build", "Flusso di Lavoro Git e GitHub", "Dipendenze Maven", "Debugging e DevTools"] },
+        databases: { title: "Database e ORM", items: ["MySQL e JDBC", "JPA e ORM Hibernate", "Progettazione DB Relazionali", "ACID / Transazioni"] },
+        webFundamentals: { title: "Fondamenti Web", items: ["Layout Responsive", "Basi di Accessibilità", "Sicurezza di Base e CORS"] },
+        backEnd: { title: "PHP & Laravel", items: ["Framework PHP & Laravel", "Architettura API RESTful", "Autenticazione / JWT", "Gestione delle Sessioni"] },
+        javaSpringBoot: { title: "Java & Spring Boot", items: ["Principi OOP Java", "Architettura Spring Boot", "Spring Security / JWT", "Mappatura Entità JPA"] },
+        angularFrontend: { title: "Angular & TypeScript", items: ["Componenti & Routing", "Programmazione TypeScript", "HttpClient Richieste REST"] }
       }
     },
     projects: {
       title: "Progetti e Case Studies",
       description: "Progetti selezionati e case studies in arrivo. Alcune voci sono attualmente in corso e verranno ampliate con approfondimenti tecnici completi.",
-      tabs: { all: "Tutti", react: "React", laravel: "Laravel" },
+      tabs: { all: "Tutti", frontEnd: "Front-End", backEnd: "Back-End", fullStack: "Full-Stack" },
       status: {
         completed: "Completato",
         wip: "In Lavorazione",
@@ -328,7 +373,8 @@ export const translations = {
         back: "Torna ai Progetti",
         viewLive: "Vedi Live",
         viewSource: "Vedi Codice",
-        clickEnlarge: "Clicca per ingrandire"
+        clickEnlarge: "Clicca per ingrandire",
+        note: "Nota Importante"
       }
     },
     contact: {
@@ -352,18 +398,20 @@ export const translations = {
     current: {
       title: "Attualmente al Lavoro su",
       subtitle: "Sviluppo in Pubblico | Aggiornato Mensilmente",
-      lastUpdate: "Ultimo aggiornamento: Gen 2026",
+      lastUpdate: "Ultimo aggiornamento: Maggio 2026",
       stages: {
         building: "In Costruzione",
         backend: "Sviluppo Back-end",
         frontend: "Sviluppo Front-end",
-        planning: "Pianificazione"
+        fullstack: "Sviluppo Full Stack",
+        planning: "Pianificazione",
+        completed: "Completato"
       },
       items: {
         "lang-btn": { title: "Pulsante Cambio Lingua", desc: "Pulsante per cambiare la lingua del sito portfolio" },
-        grocery: { title: "Gestione Inventario Cucina e Spesa", desc: "Gestione dispensa in tempo reale con avvisi scadenza e liste spesa automatiche" },
-        library: { title: "Gestione Libreria Libri e Manga", desc: "Gestore collezione personale con progresso lettura, valutazioni e registro prestiti" },
-        calendar: { title: "Calendario Creazione Contenuti", desc: "Pianificatore blog/social media con analisi prestazioni e bacheca idee" }
+        jobTracker: { title: "Tracker per Candidature di Lavoro", desc: "Registra i lavori per cui ti sei candidato, stato, note, colloqui. Utilissimo per te in questo momento e d'impatto per i recruiter" },
+        kivra: { title: "Kivra – Media Tracker Universale", desc: "Tracker tutto-in-uno per film, serie TV, anime, manga e libri, realizzato con Java Spring Boot e Angular" },
+        flashcards: { title: "App di Flashcard per Lingue", desc: "Algoritmo di ripetizione dilazionata (mostra più spesso le carte difficili). Algoritmicamente interessante e utile" }
       }
     },
     cv: {
@@ -373,8 +421,8 @@ export const translations = {
       about: {
         title: "CHI SONO",
         greeting: "Ciao, sono Maram Aouini!",
-        p1: "Sono una sviluppatrice Web Full Stack specializzata nella creazione di applicazioni web affidabili e user-friendly usando React, PHP, Laravel e MySQL. Possiedo certificazioni in Sviluppo Full Stack e Back End presso Talentform e ho esperienza pratica su progetti reali.",
-        p2: "Provenendo da un background di assistenza tecnica e servizio clienti, unisco forti capacità di problem-solving a una comunicazione chiara e una mentalità orientata all'utente. Mi piace trasformare requisiti complessi in soluzioni pulite e manutenibili che funzionano davvero."
+        p1: "Sono una sviluppatrice Web Full Stack specializzata nella creazione di applicazioni web affidabili e user-friendly. Le mie competenze spaziano dai moderni framework frontend come React e Angular, a robusti ecosistemi backend tra cui Java / Spring Boot e PHP / Laravel. Possiedo certificazioni in Sviluppo Full Stack e Back End presso Talentform, oltre a una certificazione come Junior Java Developer rilasciata da Generation Italy, e ho esperienza pratica su progetti reali.",
+        p2: "Provenendo da un background di assistenza tecnica e servizio clienti, unisco forti capacità di problem-solving a una comunicazione chiara e una mentalità orientata all'utente. Mi piace gestire integrazioni full-stack complete e tipizzate, creare API REST sicure e trasformare requisiti complessi in soluzioni pulite e manutenibili che funzionano davvero."
       },
       personalInfo: {
         title: "informazioni personali",
@@ -404,8 +452,9 @@ export const translations = {
       certifications: {
         title: "CERTIFICAZIONI",
         items: [
-          { title: "Sviluppatore Web Full Stack", desc: "Formazione completa in tecnologie web moderne inclusi HTML5, CSS3, JavaScript ES6+, React, PHP e MySQL." },
-          { title: "Sviluppatore Back End", desc: "Curriculum focalizzato su programmazione server-side, gestione database, sviluppo API e best practices di sicurezza." }
+          { title: "Junior Java Developer", company: "Generation Italy", date: "2026", desc: "Corso di formazione intensivo focalizzato sui principi OOP Java, connessione database (JDBC/MySQL), sviluppo backend enterprise e architettura MVC." },
+          { title: "Sviluppatrice Web Full Stack", company: "Talentform", date: "2025", desc: "Formazione completa in tecnologie web moderne inclusi HTML5, CSS3, JavaScript ES6+, React, PHP e MySQL." },
+          { title: "Sviluppatrice Back End", company: "Talentform", date: "2025", desc: "Curriculum focalizzato su programmazione server-side, gestione database, sviluppo API e best practices di sicurezza." }
         ]
       },
       strengths: {
@@ -420,10 +469,10 @@ export const translations = {
       focus: {
         title: "FOCUS TECNICO ATTUALE",
         items: [
-          "Miglioramento autenticazione Laravel e relazioni database",
-          "Rafforzamento architettura componenti React",
-          "Pratica di pattern di codice pulito e manutenibile",
-          "Esplorazione ottimizzazione performance e best practices"
+          "Costruzione di solidi backend Spring Boot REST e frontend Angular",
+          "Miglioramento dell'ottimizzazione dei database relazionali e mappatura JPA",
+          "Rafforzamento dell'architettura dei componenti React e gestione dello stato",
+          "Pratica di pattern di codice puliti, manutenibili e tipizzati"
         ]
       },
       experience: {
@@ -480,10 +529,10 @@ export const translations = {
         shortDescription: "Una pagina 404 interattiva e animata con gatti trascinabili e Easter egg a sorpresa.",
         fullDescription: [
           "Questo progetto è una pagina di errore 404 completamente interattiva costruita in React. Oltre a un semplice messaggio di errore, include elementi trascinabili, animazioni casuali e una modalità 'Easter egg' nascosta con il 10% di possibilità di sbloccare un messaggio segreto per coinvolgere l'utente.",
-          "Prova a visitare la pagina più volte: potresti sbloccare un segreto!",
           "La pagina gestisce sequenze di animazione complesse, gestione dello stato per multipli elementi dinamici e garantisce prestazioni fluide anche con timer e transizioni sovrapposte.",
           "Dimostra competenze avanzate di React, inclusi hook, gestione useRef, useLayoutEffect per la misurazione del layout e controllo preciso sul mounting e le animazioni dei componenti."
         ],
+        liveNote: "Suggerimento: Prova ad aggiornare o ricaricare la pagina più volte di seguito! C'è un Easter Egg speciale con il 10% di probabilità di essere attivato!",
         psa: {
           problem: "L'obiettivo era creare una pagina 404 coinvolgente e interattiva mantenendo prestazioni fluide e un comportamento prevedibile dei componenti. Le sfide includevano il coordinamento di animazioni multiple, la prevenzione dello sfarfallio del layout e la gestione dello stato dinamico per più elementi trascinabili.",
           solution: "Implementata una sequenza di animazione controllata con useLayoutEffect e useEffect per gestire i tempi, utilizzati ref per tracciare i gatti trascinabili e le zone proibite, e creata una logica di fallback per garantire un rendering stabile. Aggiunti messaggi casuali ed Easter egg per una migliore esperienza utente.",
@@ -498,13 +547,26 @@ export const translations = {
         ]
       },
       3: {
-        title: "Piattaforma Web Full-Stack",
-        shortDescription: "(Case Study in Lavorazione)",
+        title: "Kivra – Media Tracker Universale",
+        shortDescription: "Un tracker tutto-in-uno per anime, film, serie TV, manga e libri.",
         fullDescription: [
-          "Dettagli completi, codice sorgente e demo live verranno aggiunti presto."
+          "Kivra è un'applicazione per il tracciamento dei media full-stack realizzata con Java Spring Boot e Angular. Consente agli utenti di gestire e tracciare tutti i propri consumi multimediali: anime, film, serie TV, manga e libri, in un'unica piattaforma unificata.",
+          "Il progetto copre sia lo sviluppo frontend che backend, comprese le API REST, l'autenticazione utente e un'interfaccia Angular reattiva."
         ],
-        psa: null,
-        learned: []
+        psa: {
+          problem: "Tenere traccia dei media su diverse piattaforme e categorie: anime, film, libri, manga — senza un unico strumento che li gestisca tutti.",
+          solution: "Sviluppato un'applicazione full-stack con un backend API REST in Spring Boot e un frontend Angular, consentendo agli utenti di registrare e tracciare tutti i tipi di media in un unico posto.",
+          outcome: "Un tracker multimediale funzionale e pubblicato che dimostra le competenze di sviluppo full-stack sia sul backend Java che sul frontend Angular."
+        },
+        learned: [
+          "Architettare backend stratificati con i pattern Spring Boot Controller, Service e Repository.",
+          "Proteggere le API REST con Spring Security e autenticazione basata su JWT.",
+          "Costruire applicazioni a pagina singola (SPA) reattive utilizzando componenti, servizi e RxJS in Angular.",
+          "Integrare API di terze parti (TMDB/AniList) per arricchire gli elenchi dei media con metadati in tempo reale.",
+          "Progettare schemi di database relazionali e gestire la mappatura e le migrazioni delle entità JPA.",
+          "Configurare policy CORS e ambienti di produzione per distribuzioni multi-host."
+        ],
+        liveNote: "Sfortunatamente, a causa delle limitazioni dell'hosting su un servizio web gratuito, il server backend si spegne quando inattivo. All'avvio del sito live, potrebbero essere necessari fino a 2 minuti affinché il server si riattivi e risponda. Vi ringrazio per la pazienza!"
       },
       4: {
         title: "App Tracciamento Spesa",
@@ -523,6 +585,15 @@ export const translations = {
         ],
         psa: null,
         learned: []
+      },
+      6: {
+        title: "Piattaforma Web Full-Stack",
+        shortDescription: "(Case Study in Lavorazione)",
+        fullDescription: [
+          "Dettagli completi, codice sorgente e demo live verranno aggiunti presto."
+        ],
+        psa: null,
+        learned: []
       }
     },
     // WORKING ON CONTENT - ITALIAN
@@ -532,20 +603,27 @@ export const translations = {
         description: "Implementazione di una funzionalità che permette agli utenti di cambiare la lingua dell'applicazione tra Inglese e Italiano. Utilizza React Context API per la gestione dello stato globale.",
         roadmap: ["Implementare Context", "Creare UI Switcher", "Aggiungere Supporto EN/IT", "Salvare Preferenza"]
       },
-      "grocery": {
-        title: "Tracker Inventario Cucina/Spesa",
-        description: "Un'applicazione full-stack progettata per aiutare le famiglie a gestire l'inventario alimentare, ridurre gli sprechi e semplificare la spesa con notifiche di scadenza.",
-        roadmap: ["Design Schema Database", "Sviluppo API", "Implementazione Frontend", "Integrazione Barcode"]
+      "jobTracker": {
+        title: "Tracker per Candidature di Lavoro",
+        description: "Uno strumento pratico progettato per registrare e monitorare le candidature di lavoro, i calendari dei colloqui, i promemoria di follow-up e i risultati. Genuinamente utile per gestire la ricerca di lavoro e facilmente relazionabile per i recruiter.",
+        roadmap: [
+          "Design UI & Wireframing",
+          "Modulo di Inserimento Lavoro",
+          "Lista Lavori & Tracciamento Stato",
+          "Ricerca, Filtri & Ordinamento",
+          "Note & Promemoria per Lavoro",
+          "Statistiche & Panoramica Candidature"
+        ]
       },
-      "library": {
-        title: "Tracker Libreria Libri/Manga",
-        description: "Uno strumento organizzativo per tracciare collezioni e abitudini di lettura. Permette di categorizzare titoli, tracciare il progresso e valutare serie.",
-        roadmap: ["Design UI", "Integrazione API Google Books", "Autenticazione Utente", "Registro Letture"]
+      "kivra": {
+        title: "Kivra – Media Tracker Universale",
+        description: "Un'applicazione completa per il tracciamento dei media che consente agli utenti di catalogare e monitorare i propri progressi tra film, serie TV, anime, manga e libri. Caratterizzata da una robusta architettura backend stratificata in Java Spring Boot e da un'applicazione client dinamica e reattiva in Angular e TypeScript. Include l'integrazione di database, autenticazione utente sicura e integrazioni con API multimediali esterne.",
+        roadmap: ["Modellazione del Database e Setup Schema", "Sviluppo di API RESTful in Spring Boot", "Spring Security e Autenticazione JWT", "Architettura dei Componenti Angular", "Integrazione API Esterne", "Miglioramenti UX/UI", "Risoluzione Bug e Refactoring"]
       },
-      "calendar": {
-        title: "Calendario Creazione Contenuti",
-        description: "Uno strumento di produttività per pianificare e programmare post. Include un calendario drag-and-drop e una bacheca idee per brainstorming.",
-        roadmap: ["Componente Calendario", "Logica Drag & Drop", "Form Metadati Post", "Dashboard Analisi"]
+      "flashcards": {
+        title: "App di Flashcard per Lingue",
+        description: "Un'applicazione di apprendimento super interessante basata su algoritmi che utilizza intervalli di ripetizione dilazionata per programmare le sessioni di ripasso, assicurando che i vocaboli con cui si ha più difficoltà vengano proposti più frequentemente.",
+        roadmap: ["Algoritmo Ripetizione Dilazionata", "Creatore di Deck Interattivo", "Sessione di Ripasso Dilazionata", "Grafici di Progresso e Competenza"]
       }
     }
   }

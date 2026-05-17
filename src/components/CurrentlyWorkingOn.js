@@ -39,7 +39,9 @@ export const CurrentlyWorkingOn = () => {
                                     if (project.stageKey === "building") displayStage = t('current.stages.building');
                                     else if (project.stageKey === "backend") displayStage = t('current.stages.backend');
                                     else if (project.stageKey === "frontend") displayStage = t('current.stages.frontend');
+                                    else if (project.stageKey === "fullstack") displayStage = t('current.stages.fullstack');
                                     else if (project.stageKey === "planning") displayStage = t('current.stages.planning');
+                                    else if (project.stageKey === "completed") displayStage = t('current.stages.completed');
 
                                     return (
                                         <Col md={6} lg={3} key={index} className="mb-4">
