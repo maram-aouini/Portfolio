@@ -1,8 +1,6 @@
 import { Briefcase, BookOpen, Layers, Globe2 } from "lucide-react";
 // Import placeholder images
 import projImg1 from "../assets/img/projects/project1-img1.png";
-import wipImg2 from "../assets/img/projects/wip-img1.png";
-import projImg3 from "../assets/img/projects/project-img3.png";
 import kivraHp from "../assets/img/projects/Kivra-HP.png";
 import jobTrackerPlaceholder from "../assets/img/projects/project-placeholder1.png";
 import flashcardsPlaceholder from "../assets/img/projects/flashcard_app_placeholder.svg";
